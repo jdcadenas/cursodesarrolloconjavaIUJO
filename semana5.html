@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Semana 5 - Proyecto Final Integrador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #f93131;
+            --dark-red: #2a0000;
+            --bg-gradient: linear-gradient(135deg, #f93131 0%, #1a0000 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --code-bg: #0a0a0a;
+            --console-bg: #1e1e1e;
+        }
+
+        body {
+            background-color: #050505;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 150px;
+            padding: 100px 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 850px;
+            background: var(--bg-gradient);
+            border-radius: 40px;
+            padding: 60px 80px;
+            position: relative;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: white;
+            padding: 12px 25px;
+            border-radius: 18px;
+            z-index: 10;
+        }
+        .header-logo img { height: 45px; }
+
+        .title {
+            font-size: 40px;
+            font-weight: 900;
+            border-left: 15px solid white;
+            padding-left: 30px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            width: 100%;
+            align-items: start;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #e0e0e0;
+            border: 1px solid rgba(255,255,255,0.15);
+            width: 100%;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        .kw { color: #ff79c6; font-weight: bold; }
+        .tp { color: #8be9fd; }
+        .fn { color: #50fa7b; }
+        .st { color: #f1fa8c; }
+        .cm { color: #6272a4; font-style: italic; }
+
+        .console-box {
+            background: var(--console-bg);
+            border-top: 35px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 16px;
+            color: #f8f8f2;
+            position: relative;
+            margin-top: 15px;
+            width: 100%;
+        }
+        .console-box::before {
+            content: "● ● ●  IUJO-SYSTEM-OUTPUT";
+            position: absolute;
+            top: -26px;
+            left: 15px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .explanation-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 25px;
+            border-radius: 25px;
+        }
+
+        .aclaratoria {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(241, 250, 140, 0.1);
+            border-left: 4px solid #f1fa8c;
+            color: #f1fa8c;
+            font-size: 16px;
+        }
+
+        .diagram {
+            background: rgba(0,0,0,0.3);
+            border: 2px dashed rgba(255,255,255,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            margin: 20px 0;
+            color: #8be9fd;
+        }
+
+        .badge {
+            background: white;
+            color: var(--primary-red);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h3 { color: white; margin: 0 0 15px 0; font-size: 24px; }
+        p { font-size: 18px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA PROYECTO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <span class="badge">PROYECTO FINAL INTEGRADOR</span>
+        <h1 style="font-size: 70px; margin: 0; letter-spacing: -2px;">SISTEMA DE GESTIÓN <br>ACADÉMICA IUJO</h1>
+        <p style="font-size: 28px; font-weight: 300; opacity: 0.9;">Consolidación de Semanas 1 a 4</p>
+        <div style="width: 200px; height: 6px; background: white; margin: 40px auto; border-radius: 10px;"></div>
+        <p style="max-width: 900px; margin: 0 auto; font-size: 20px;">
+            Aplicaremos Herencia, Polimorfismo, Encapsulamiento, Colecciones y Manejo de Excepciones para construir una herramienta funcional de administración de estudiantes y pagos.
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 2: MODULARIDAD Y PAQUETES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Modularidad: Organización por Paquetes</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>¿Por qué paquetes?</h3>
+            <p>En proyectos profesionales, no todo va en un solo archivo. Dividimos el código por <b>responsabilidades</b>:</p>
+            <div class="diagram">
+                src/<br>
+                └── com.iujo.gestion/<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;├── main/ (App Principal)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;├── model/ (Persona, Estudiante)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;├── service/ (Gestor Genérico)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;└── exception/ (Excepciones Personalizadas)
+            </div>
+        </div>
+        <div class="explanation-card">
+            <h3>Control de Visibilidad</h3>
+            <ul>
+                <li><code>public</code>: Accesible desde cualquier paquete.</li>
+                <li><code>protected</code>: Solo heredados y mismo paquete.</li>
+                <li><code>private</code>: Solo dentro de la misma clase.</li>
+            </ul>
+            <div class="aclaratoria">
+                Ingeniería: Esta división permite que múltiples programadores trabajen en el mismo proyecto sin interferir entre sí.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: PASO 1 - EL MODELO BASE -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Paso 1: Herencia y Encapsulamiento</div>
+<pre>
+<span class="cm">// Ubicado en com.iujo.gestion.model</span>
+<span class="kw">public abstract class</span> <span class="tp">Persona</span> {
+    <span class="kw">protected</span> <span class="tp">String</span> nombre;
+    <span class="kw">protected</span> <span class="tp">String</span> cedula;
+
+    <span class="kw">public</span> <span class="tp">Persona</span>(<span class="tp">String</span> nombre, <span class="tp">String</span> cedula) {
+        <span class="kw">this</span>.nombre = nombre; <span class="kw">this</span>.cedula = cedula;
+    }
+    <span class="kw">public abstract void</span> <span class="fn">mostrarPerfil</span>();
+    <span class="kw">public</span> <span class="tp">String</span> <span class="fn">getCedula</span>() { <span class="kw">return</span> cedula; }
+}
+
+<span class="kw">public class</span> <span class="tp">Estudiante</span> <span class="kw">extends</span> <span class="tp">Persona</span> {
+    <span class="kw">private</span> <span class="tp">double</span> balanceCuenta;
+
+    <span class="kw">public</span> <span class="tp">Estudiante</span>(<span class="tp">String</span> n, <span class="tp">String</span> c) { <span class="kw">super</span>(n, c); }
+
+    <span class="kw">public void</span> <span class="fn">pagarInscripcion</span>(<span class="tp">double</span> monto) <span class="kw">throws</span> <span class="tp">Exception</span> {
+        <span class="kw">if</span> (monto > balanceCuenta) 
+            <span class="kw">throw new</span> <span class="tp">Exception</span>(<span class="st">"Saldo insuficiente ($"</span> + balanceCuenta + <span class="st">")"</span>);
+        balanceCuenta -= monto;
+    }
+    <span class="kw">public void</span> <span class="fn">recargar</span>(<span class="tp">double</span> m) { balanceCuenta += m; }
+    <span class="kw">public void</span> <span class="fn">mostrarPerfil</span>() { 
+        <span class="tp">System</span>.out.println(<span class="st">"[ID: "</span> + cedula + <span class="st">"] "</span> + nombre + <span class="st">" | Saldo: $"</span> + balanceCuenta);
+    }
+}
+</pre>
+</div>
+
+<!-- SLIDE 4: PASO 2 - GESTIÓN GENÉRICA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Paso 2: Colecciones y Genéricos</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Poder de Reutilización</h3>
+            <p>La clase <code>GestorIUJO</code> no sabe qué guarda, solo sabe cómo administrar una lista.</p>
+            <div class="aclaratoria">
+                Dato Pro: Usar <code>&lt;T extends Persona&gt;</code> asegura que nuestro gestor solo acepte objetos que sean personas.
+            </div>
+        </div>
+<pre>
+<span class="kw">import</span> java.util.<span class="tp">ArrayList</span>;
+
+<span class="cm">// Ubicado en com.iujo.gestion.service</span>
+<span class="kw">public class</span> <span class="tp">GestorIUJO</span>&lt;<span class="tp">T</span>&gt; {
+    <span class="kw">private</span> <span class="tp">ArrayList</span>&lt;<span class="tp">T</span>&gt; lista = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+
+    <span class="kw">public void</span> <span class="fn">agregar</span>(<span class="tp">T</span> item) {
+        lista.add(item);
+    }
+
+    <span class="kw">public</span> <span class="tp">ArrayList</span>&lt;<span class="tp">T</span>&gt; <span class="fn">obtenerTodos</span>() {
+        <span class="kw">return</span> lista;
+    }
+
+    <span class="kw">public</span> <span class="tp">int</span> <span class="fn">contar</span>() { <span class="kw">return</span> lista.size(); }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 5: PASO 3 - LÓGICA DE NEGOCIO Y EXCEPCIONES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Paso 3: Menú con Funcionalidades Completas</div>
+<pre style="font-size: 13px;">
+<span class="kw">import</span> java.util.<span class="tp">Scanner</span>;
+
+<span class="kw">public class</span> <span class="tp">AppIUJO</span> {
+    <span class="kw">private static</span> <span class="tp">GestorIUJO</span>&lt;<span class="tp">Estudiante</span>&gt; db = <span class="kw">new</span> <span class="tp">GestorIUJO</span>&lt;&gt;();
+    <span class="kw">private static</span> <span class="tp">Scanner</span> sc = <span class="kw">new</span> <span class="tp">Scanner</span>(<span class="tp">System</span>.in);
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="kw">int</span> opcion = <span class="st">0</span>;
+        <span class="kw">do</span> {
+            <span class="tp">System</span>.out.println(<span class="st">"\n--- SISTEMA IUJO (Total: "</span> + db.contar() + <span class="st">") ---"</span>);
+            <span class="tp">System</span>.out.print(<span class="st">"1. Nuevo Estudiante\n2. Cargar Saldo\n3. Pagar Matrícula\n4. Listar\n5. Salir\nOpción: "</span>);
+            opcion = sc.nextInt();
+            <span class="kw">procesar</span>(opcion);
+        } <span class="kw">while</span> (opcion != <span class="st">5</span>);
+    }
+
+    <span class="kw">private static void</span> <span class="fn">procesar</span>(<span class="kw">int</span> op) {
+        <span class="kw">try</span> {
+            <span class="kw">switch</span>(op) {
+                <span class="kw">case</span> <span class="st">1</span>: <span class="fn">registrar</span>(); <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">2</span>: <span class="fn">gestionarSaldo</span>(<span class="st">true</span>); <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">3</span>: <span class="fn">gestionarSaldo</span>(<span class="st">false</span>); <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">4</span>: <span class="kw">for</span>(<span class="tp">Estudiante</span> e : db.obtenerTodos()) e.mostrarPerfil(); <span class="kw">break</span>;
+            }
+        } <span class="kw">catch</span> (<span class="tp">Exception</span> e) { <span class="tp">System</span>.err.println(<span class="st">"ERROR: "</span> + e.getMessage()); }
+    }
+    <span class="cm">// ... (métodos registrar() y gestionarSaldo() a continuación)</span>
+}
+</pre>
+</div>
+
+<!-- SLIDE 6: PASO 4 - MÉTODOS DE APOYO (LÓGICA) -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Paso 4: Implementación de Acciones</div>
+<pre>
+<span class="kw">private static void</span> <span class="fn">registrar</span>() {
+    <span class="tp">System</span>.out.print(<span class="st">"Nombre: "</span>); <span class="tp">String</span> n = sc.next();
+    <span class="tp">System</span>.out.print(<span class="st">"Cédula: "</span>); <span class="tp">String</span> c = sc.next();
+    db.agregar(<span class="kw">new</span> <span class="tp">Estudiante</span>(n, c));
+}
+
+<span class="kw">private static void</span> <span class="fn">gestionarSaldo</span>(<span class="kw">boolean</span> esCarga) <span class="kw">throws</span> <span class="tp">Exception</span> {
+    <span class="tp">System</span>.out.print(<span class="st">"Cédula del estudiante: "</span>); <span class="tp">String</span> id = sc.next();
+    <span class="tp">Estudiante</span> encontrado = <span class="kw">null</span>;
+    <span class="kw">for</span>(<span class="tp">Estudiante</span> e : db.obtenerTodos()) {
+        <span class="kw">if</span>(e.getCedula().equals(id)) encontrado = e;
+    }
+    
+    <span class="kw">if</span>(encontrado == <span class="kw">null</span>) <span class="kw">throw new</span> <span class="tp">Exception</span>(<span class="st">"Estudiante no registrado"</span>);
+
+    <span class="tp">System</span>.out.print(<span class="st">"Monto $: "</span>); <span class="tp">double</span> m = sc.nextDouble();
+    <span class="kw">if</span>(esCarga) encontrado.recargar(m);
+    <span class="kw">else</span> encontrado.pagarInscripcion(m);
+    <span class="tp">System</span>.out.println(<span class="st">"¡Operación exitosa!"</span>);
+}
+</pre>
+    <div class="console-box">
+        --- SISTEMA IUJO ---<br>
+        1. Nuevo Estudiante | 3. Pagar Matrícula<br>
+        Opción: 3<br>
+        Cédula del estudiante: 28123<br>
+        ERROR: Saldo insuficiente ($0.0)
+    </div>
+</div>
+
+<!-- SLIDE 7: BUENAS PRÁCTICAS Y DOCUMENTACIÓN -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Buenas Prácticas (Clean Code)</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>JavaDoc: El estándar</h3>
+            <p>Documentar no es solo poner comentarios, es explicar el <b>propósito</b>.</p>
+<pre>
+<span class="cm">/**
+ * Procesa el pago de la matrícula semestral.
+ * @param monto Valor a debitar del balance.
+ * @throws Exception si el balance es menor al monto.
+ */</span>
+<span class="kw">public void</span> <span class="fn">pagar</span>(<span class="tp">double</span> monto) ...
+</pre>
+        </div>
+        <div class="explanation-card">
+            <h3>Principios SOLID</h3>
+            <ul>
+                <li><b>Single Responsibility:</b> Una clase, una tarea (El Gestor solo guarda, el Estudiante solo es datos).</li>
+                <li><b>Open/Closed:</b> El sistema está abierto a extenderse (puedo agregar <code>Profesor</code>) pero cerrado a modificar el núcleo.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: TOSTRING Y EQUALS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">El Poder de la Clase Object</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Sobrescritura de <code>toString()</code></h3>
+            <p style="font-size: 16px;">Por defecto, imprimir un objeto muestra su referencia. Sobrescribir <code>toString</code> nos da una representación legible.</p>
+<pre style="font-size: 13px;">
+<span class="cm">// Dentro de la clase Estudiante</span>
+<span class="kw">@Override</span>
+<span class="kw">public</span> String <span class="fn">toString</span>() {
+    <span class="kw">return</span> <span class="st">"Estudiante["</span> +
+           <span class="st">"Cédula="</span> + cedula +
+           <span class="st">", Nombre="</span> + nombre + <span class="st">']'</span>;
+}
+</pre>
+        </div>
+        <div class="explanation-card">
+            <h3>Sobrescritura de <code>equals()</code></h3>
+            <p style="font-size: 16px;">El operador <code>==</code> compara referencias, no contenido. Para comparar objetos por su valor (ej. por cédula), usamos <code>equals</code>.</p>
+<pre style="font-size: 13px;">
+<span class="cm">// Dentro de la clase Estudiante</span>
+<span class="kw">@Override</span>
+<span class="kw">public boolean</span> <span class="fn">equals</span>(Object obj) {
+    <span class="kw">if</span> (<span class="kw">this</span> == obj) <span class="kw">return true</span>;
+    <span class="kw">if</span> (obj == <span class="kw">null</span> || getClass() != obj.getClass()) <span class="kw">return false</span>;
+    <span class="tp">Estudiante</span> other = (<span class="tp">Estudiante</span>) obj;
+    <span class="kw">return</span> cedula.equals(other.cedula);
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: GIT -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Buenas Prácticas: Control de Versiones</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>¿Qué es Git?</h3>
+            <p>Es un sistema que guarda un historial de "fotografías" de tu código en el tiempo. Es el estándar de la industria.</p>
+            <ul>
+                <li>Permite regresar a versiones anteriores.</li>
+                <li>Facilita el trabajo en equipo.</li>
+                <li>Provee un respaldo de tu trabajo.</li>
+            </ul>
+        </div>
+        <div class="explanation-card">
+            <h3>Comandos Esenciales</h3>
+            <p>El ciclo básico de trabajo en Git:</p>
+            <pre style="font-size: 14px;">
+<span class="cm"># 1. Inicia el repositorio (solo una vez)</span>
+$ git init
+
+<span class="cm"># 2. Prepara todos tus archivos nuevos/modificados</span>
+$ git add .
+
+<span class="cm"># 3. Guarda la "fotografía" con un mensaje</span>
+$ git commit -m "Mi primer avance del proyecto"
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: CONCLUSIÓN DEL CURSO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <h1 style="font-size: 60px;">¡CERTIFICACIÓN CORE JAVA!</h1>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
+            <div class="explanation-card" style="border-color: #50fa7b;">
+                <h3 style="color: #50fa7b;">Habilidades Dominadas</h3>
+                <p>Abstracción, Encapsulamiento, Herencia, Polimorfismo, Manejo de Errores y Estructuras de Datos Dinámicas.</p>
+            </div>
+            <div class="explanation-card" style="border-color: #f1fa8c;">
+                <h3 style="color: #f1fa8c;">Siguiente Nivel</h3>
+                <p>Bases de Datos (JDBC), Interfaces Gráficas (JavaFX) o Desarrollo Web con Spring Boot.</p>
+            </div>
+        </div>
+        <p style="margin-top: 50px; font-size: 24px;">"El software no se termina, se construye paso a paso."</p>
+        <span class="badge" style="margin-top: 20px;">IUJO - Tecnología al servicio de la Educación</span>
+    </div>
+</div>
+
+</body>
+</html>

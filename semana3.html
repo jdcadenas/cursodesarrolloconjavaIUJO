@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Semana 3 - Colecciones y Datos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #f93131;
+            --dark-red: #2a0000;
+            --bg-gradient: linear-gradient(135deg, #f93131 0%, #1a0000 100%);
+            --glass: rgba(255, 255, 255, 0.12);
+            --code-bg: #0d0d0d;
+            --accent-yellow: #f1fa8c;
+            --cyan: #8be9fd;
+            --green: #50fa7b;
+            --orange: #ffb86c;
+        }
+
+        body {
+            background-color: #050505;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 150px;
+            padding: 100px 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 850px;
+            background: var(--bg-gradient);
+            border-radius: 40px;
+            padding: 60px 80px;
+            position: relative;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-logo-right {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 20px;
+            z-index: 10;
+        }
+        .header-logo-right img { height: 50px; }
+
+        .slide-title {
+            font-size: 45px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            border-left: 15px solid white;
+            padding-left: 25px;
+        }
+
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .visual-box {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visual-box h3 {
+            margin-top: 0;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #f8f8f2;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        .kw { color: #ff79c6; } /* keyword */
+        .tp { color: #8be9fd; } /* type */
+        .fn { color: #50fa7b; } /* function */
+        .st { color: #f1fa8c; } /* string */
+        .cm { color: #6272a4; font-style: italic; } /* comment */
+
+        .badge {
+            background: white;
+            color: var(--primary-red);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 900;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .table-mini {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table-mini th, .table-mini td {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .concept-tag {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'Fira Code', monospace;
+            color: var(--cyan);
+            margin-right: 5px;
+        }
+
+        .full-image-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            height: 100%;
+        }
+
+        .full-image-slide img {
+            max-width: 100%;
+            max-height: calc(100% - 80px); /* Descontar espacio para el título */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: INTRODUCCIÓN -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="margin: auto; text-align: center;">
+        <span class="badge">SEMANA 3: COLECCIONES Y ESTRUCTURAS</span>
+        <h1 style="font-size: 70px; margin: 0; line-height: 1;">GESTIÓN DINÁMICA<br><span style="font-weight: 300;">DE DATOS EN JAVA</span></h1>
+        <div style="width: 120px; height: 6px; background: white; margin: 30px auto;"></div>
+        <p style="font-size: 24px; opacity: 0.9; max-width: 800px; margin: 0 auto;">
+            Definición de colecciones, manejo de arreglos, listas, conjuntos, mapas e iteración profesional.
+        </p>
+    </div>
+</div>
+
+<!-- SLIDE 2: DEFINICIÓN Y ARREGLOS -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Colecciones y Arreglos</h2>
+    <div class="content-area">
+        <div class="visual-box">
+            <h3><i class="fa-solid fa-box-archive"></i> ¿Qué es una Colección?</h3>
+            <p>Es un objeto que agrupa múltiples elementos en una sola unidad. Se usan para almacenar, recuperar y manipular datos agregados.</p>
+            <hr style="opacity:0.1; width:100%">
+            <h3><i class="fa-solid fa-microchip"></i> Arreglos (Arrays)</h3>
+            <p>Son estructuras de <strong>tamaño fijo</strong>. Una vez creados, no pueden crecer.</p>
+            <div style="margin-top: auto;">
+                <span class="concept-tag">Estáticos</span>
+                <span class="concept-tag">Indexados (0 a n-1)</span>
+            </div>
+        </div>
+        <div class="visual-box">
+<pre>
+<span class="kw">public class</span> <span class="tp">MainArreglos</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="cm">// Declaración y uso de arreglo</span>
+        <span class="tp">int</span>[] notas = <span class="kw">new</span> <span class="tp">int</span>[<span class="st">3</span>];
+        notas[<span class="st">0</span>] = <span class="st">15</span>;
+        notas[<span class="st">1</span>] = <span class="st">20</span>;
+        notas[<span class="st">2</span>] = <span class="st">18</span>;
+
+        <span class="tp">System</span>.out.println(<span class="st">"Nota 1: "</span> + notas[<span class="st">0</span>]);
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: API DE JAVA -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">La API de Java</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen12LaApideJAva.png" alt="La API de Java">
+    </div>
+</div>
+
+<!-- SLIDE 3: LIST Y ARRAYLIST -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Listas Dinámicas: ArrayList</h2>
+    <div class="content-area">
+        <div class="visual-box">
+            <h3><i class="fa-solid fa-list-ul"></i> Interfaz List</h3>
+            <p>Una <code>List</code> es una colección ordenada que permite elementos duplicados.</p>
+            <p><strong>ArrayList:</strong> Es la implementación más usada. Funciona como un arreglo que crece automáticamente.</p>
+            <table class="table-mini">
+                <tr><th>Acción</th><th>Método</th></tr>
+                <tr><td>Añadir</td><td><code>add(E e)</code></td></tr>
+                <tr><td>Obtener</td><td><code>get(int index)</code></td></tr>
+                <tr><td>Eliminar</td><td><code>remove(int index)</code></td></tr>
+            </table>
+        </div>
+        <div class="visual-box">
+<pre>
+<span class="kw">import</span> java.util.<span class="tp">ArrayList</span>;
+<span class="kw">import</span> java.util.<span class="tp">List</span>;
+
+<span class="kw">public class</span> <span class="tp">MainListas</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">List</span>&lt;<span class="tp">String</span>&gt; lista = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+        lista.<span class="fn">add</span>(<span class="st">"Java"</span>);
+        lista.<span class="fn">add</span>(<span class="st">"Python"</span>);
+        
+        <span class="tp">System</span>.out.println(<span class="st">"Total: "</span> + lista.<span class="fn">size</span>());
+        <span class="tp">System</span>.out.println(<span class="st">"Primero: "</span> + lista.<span class="fn">get</span>(<span class="st">0</span>));
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: HASHSET (ELEMENTOS ÚNICOS) -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">HashSet: Conjuntos Únicos</h2>
+    <div class="content-area">
+        <div class="visual-box">
+            <h3><i class="fa-solid fa-circle-nodes"></i> Sin Duplicados</h3>
+            <p>Un <code>Set</code> es una colección que <strong>no permite elementos repetidos</strong>. No tiene un orden garantizado.</p>
+            <div style="background: rgba(80, 250, 123, 0.1); padding: 15px; border-radius: 10px; border-left: 5px solid var(--green);">
+                <p style="margin:0; font-size: 14px; color: var(--green);"><strong>Uso común:</strong> Almacenar Cédulas o correos electrónicos para evitar registros dobles.</p>
+            </div>
+        </div>
+        <div class="visual-box">
+<pre>
+<span class="kw">import</span> java.util.<span class="tp">HashSet</span>;
+
+<span class="kw">public class</span> <span class="tp">MainSets</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">HashSet</span>&lt;<span class="tp">String</span>&gt; set = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;();
+        set.<span class="fn">add</span>(<span class="st">"A"</span>);
+        set.<span class="fn">add</span>(<span class="st">"B"</span>);
+        set.<span class="fn">add</span>(<span class="st">"A"</span>); <span class="cm">// Se ignora</span>
+
+        <span class="tp">System</span>.out.println(<span class="st">"Tamaño: "</span> + set.<span class="fn">size</span>()); <span class="cm">// Imprime 2</span>
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: HASHMAP (DICCIONARIOS) -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">HashMap: Clave e Índice</h2>
+    <div class="content-area">
+        <div class="visual-box">
+            <h3><i class="fa-solid fa-key"></i> Mapas (Key-Value)</h3>
+            <p>Almacena pares de datos. Cada elemento tiene una <strong>Llave (Key)</strong> y un <strong>Valor (Value)</strong>.</p>
+            <p>Funciona como un "Diccionario" o una lista con índices personalizados.</p>
+            <ul style="font-size: 15px;">
+                <li><code>put(k, v)</code>: Inserta o actualiza.</li>
+                <li><code>get(k)</code>: Recupera el valor.</li>
+            </ul>
+        </div>
+        <div class="visual-box">
+<pre>
+<span class="kw">import</span> java.util.<span class="tp">HashMap</span>;
+
+<span class="kw">public class</span> <span class="tp">MainMapas</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">HashMap</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; edades = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+        edades.<span class="fn">put</span>(<span class="st">"Juan"</span>, <span class="st">20</span>);
+        edades.<span class="fn">put</span>(<span class="st">"Maria"</span>, <span class="st">22</span>);
+
+        <span class="tp">System</span>.out.println(<span class="st">"Edad de Juan: "</span> + edades.<span class="fn">get</span>(<span class="st">"Juan"</span>));
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: ITERADORES Y BUCLES -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Iteración sobre Colecciones</h2>
+    <div class="content-area">
+        <div class="visual-box">
+            <h3><i class="fa-solid fa-arrows-spin"></i> Formas de Recorrer</h3>
+            <p>Java ofrece varias formas de leer todos los elementos de una colección:</p>
+            <ol style="font-size: 16px;">
+                <li><strong>Bucle For-each:</strong> El más moderno y limpio.</li>
+                <li><strong>Iterator:</strong> Útil para eliminar elementos mientras recorres.</li>
+            </ol>
+            <div class="badge" style="background: var(--accent-yellow); color: black;">¡Recomendado: For-each!</div>
+        </div>
+        <div class="visual-box">
+<pre>
+<span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="tp">MainIteracion</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">List</span>&lt;<span class="tp">String</span>&gt; items = <span class="tp">Arrays</span>.<span class="fn">asList</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>);
+
+        <span class="cm">// 1. For-each</span>
+        <span class="kw">for</span> (<span class="tp">String</span> s : items) { <span class="tp">System</span>.out.println(s); }
+
+        <span class="cm">// 2. Iterator</span>
+        <span class="tp">Iterator</span>&lt;<span class="tp">String</span>&gt; it = items.<span class="fn">iterator</span>();
+        <span class="kw">while</span> (it.<span class="fn">hasNext</span>()) {
+            <span class="tp">System</span>.out.println(it.<span class="fn">next</span>());
+        }
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: RETO FINAL INTEGRADOR -->
+<div class="slide-container" style="height: 800px;">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Reto Final: Gestión de Inventario</h2>
+    <div class="content-area">
+        <div class="visual-box" style="grid-column: span 2;">
+            <h3><i class="fa-solid fa-boxes-stacked"></i> Consigna del Reto</h3>
+            <p>Crear un programa interactivo para gestionar el inventario de una tienda. El programa debe mostrar un menú y realizar acciones basadas en la selección del usuario.</p>
+            <p><strong>Requisitos:</strong></p>
+            <ul style="font-size: 18px;">
+                <li>Usar un <strong>ArrayList</strong> para almacenar los nombres de los productos.</li>
+                <li>Implementar un bucle <code>while</code> para que el menú se muestre repetidamente.</li>
+                <li>Dentro del bucle, usar un <code>switch</code> para manejar las siguientes opciones:
+                    <ol>
+                        <li><strong>Agregar producto:</strong> Pide al usuario un nombre y lo añade a la lista.</li>
+                        <li><strong>Buscar producto:</strong> Pide un nombre y confirma si existe en la lista.</li>
+                        <li><strong>Eliminar producto:</strong> Pide un nombre y lo elimina de la lista.</li>
+                        <li><strong>Listar productos:</strong> Muestra todos los productos en el inventario.</li>
+                        <li><strong>Salir.</strong></li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: SOLUCIÓN AL RETO -->
+<div class="slide-container" style="height: 900px; overflow-y: auto;">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Solución: Gestión de Inventario</h2>
+<pre style="font-size: 14px; line-height: 1.2;">
+<span class="kw">import</span> java.util.ArrayList;
+<span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public class</span> <span class="tp">GestionInventario</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">ArrayList</span>&lt;<span class="tp">String</span>&gt; inventario = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="tp">int</span> opcion = 0;
+
+        <span class="kw">while</span> (opcion != 5) {
+            System.out.println(<span class="st">"\n--- INVENTARIO IUJO ---"</span>);
+            System.out.println(<span class="st">"1. Agregar producto"</span>);
+            System.out.println(<span class="st">"2. Buscar producto"</span>);
+            System.out.println(<span class="st">"3. Eliminar producto"</span>);
+            System.out.println(<span class="st">"4. Listar productos"</span>);
+            System.out.println(<span class="st">"5. Salir"</span>);
+            System.out.print(<span class="st">"Opción: "</span>);
+            opcion = sc.nextInt();
+            sc.nextLine(); <span class="cm">// Consumir newline</span>
+
+            <span class="kw">switch</span> (opcion) {
+                <span class="kw">case</span> 1:
+                    System.out.print(<span class="st">"Nombre del producto a agregar: "</span>);
+                    inventario.add(sc.nextLine());
+                    System.out.println(<span class="st">"¡Producto agregado!"</span>);
+                    <span class="kw">break</span>;
+                <span class="kw">case</span> 2:
+                    System.out.print(<span class="st">"Nombre del producto a buscar: "</span>);
+                    <span class="kw">if</span> (inventario.contains(sc.nextLine())) {
+                        System.out.println(<span class="st">"El producto SÍ está en el inventario."</span>);
+                    } <span class="kw">else</span> {
+                        System.out.println(<span class="st">"El producto NO fue encontrado."</span>);
+                    }
+                    <span class="kw">break</span>;
+                <span class="kw">case</span> 3:
+                    System.out.print(<span class="st">"Nombre del producto a eliminar: "</span>);
+                    <span class="kw">if</span> (inventario.remove(sc.nextLine())) {
+                        System.out.println(<span class="st">"Producto eliminado."</span>);
+                    } <span class="kw">else</span> {
+                        System.out.println(<span class="st">"No se pudo eliminar, producto no encontrado."</span>);
+                    }
+                    <span class="kw">break</span>;
+                <span class="kw">case</span> 4:
+                    System.out.println(<span class="st">"\n--- Lista de Productos ---"</span>);
+                    <span class="kw">for</span> (<span class="tp">String</span> producto : inventario) {
+                        System.out.println(<span class="st">"- "</span> + producto);
+                    }
+                    <span class="kw">break</span>;
+                <span class="kw">case</span> 5:
+                    System.out.println(<span class="st">"Saliendo del sistema..."</span>);
+                    <span class="kw">break</span>;
+                <span class="kw">default</span>:
+                    System.out.println(<span class="st">"Opción no válida."</span>);
+            }
+        }
+    }
+}
+</pre>
+</div>
+
+<!-- SLIDE 10: RESUMEN FINAL -->
+<div class="slide-container">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="margin: auto; text-align: center;">
+        <h2 style="font-size: 50px;">RESUMEN DE ESTRUCTURAS</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
+            <div class="visual-box" style="width: 250px;">
+                <h4 style="color:var(--cyan)">ArrayList</h4>
+                <p style="font-size:14px">Ordenado y con duplicados.</p>
+            </div>
+            <div class="visual-box" style="width: 250px;">
+                <h4 style="color:var(--green)">HashSet</h4>
+                <p style="font-size:14px">Únicos y sin orden.</p>
+            </div>
+            <div class="visual-box" style="width: 250px;">
+                <h4 style="color:var(--accent-yellow)">HashMap</h4>
+                <p style="font-size:14px">Clave-Valor (Búsqueda rápida).</p>
+            </div>
+        </div>
+        <p style="margin-top: 50px; font-weight: 700; color: white;">¡Dominar esto es el 50% de Java Profesional!</p>
+    </div>
+</div>
+
+</body>
+</html>

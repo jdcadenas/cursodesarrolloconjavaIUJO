@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Semana 1 - IUJO Barquisimeto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* CONFIGURACIÓN BASE INSTITUCIONAL IUJO */
+:root {
+  --primary-red: #f93131;
+  --dark-red: #8b0000;
+  --accent-white: #ffffff;
+  --soft-gray: #e2e8f0;
+  --bg-gradient: linear-gradient(135deg, #f93131 0%, #3a0000 100%);
+  --glass: rgba(255, 255, 255, 0.15);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: #111;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.slide-container {
+  width: 1280px;
+  height: 720px;
+  background: var(--bg-gradient);
+  color: var(--accent-white);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 80px;
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+/* LOGO ESQUINA SUPERIOR DERECHA - FONDO BLANCO */
+.header-logo-right {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.header-logo-right img {
+  height: 50px;
+}
+
+.slide-title {
+  font-size: 50px;
+  font-weight: 900;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  color: var(--accent-white);
+  border-left: 8px solid white;
+  padding-left: 20px;
+}
+
+/* TIPOGRAFÍA Y ESTILO DE TEXTO */
+p, li { font-size: 26px; line-height: 1.4; margin-bottom: 12px; }
+strong { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
+
+/* CONTENEDORES VISUALES */
+.content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+
+.visual-box {
+  background: var(--glass);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* RESALTADO DE CÓDIGO (JAVA SYNTAX) */
+pre {
+  background: #0a0a0a;
+  padding: 25px;
+  border-radius: 15px;
+  font-family: 'Fira Code', monospace;
+  font-size: 19px;
+  color: #f8f8f2;
+  border-left: 8px solid #fff;
+  margin: 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+.kw { color: #ff79c6; font-weight: 700; } /* Keyword */
+.tp { color: #8be9fd; } /* Type */
+.st { color: #f1fa8c; } /* String */
+.cm { color: #6272a4; font-style: italic; } /* Comment */
+.fn { color: #50fa7b; } /* Function */
+
+.operator-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.op-card {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+.op-card h4 { margin: 0; color: white; font-size: 30px; }
+
+/* IMAGENES */
+.image-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    border: 4px solid var(--glass);
+}
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#slide4 .image-wrapper img {
+    object-fit: contain;
+}
+
+.full-image-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    height: 100%;
+}
+
+.full-image-slide img {
+    max-width: 100%;
+    max-height: calc(100% - 80px); /* Descontar espacio para el título */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA -->
+<div class="slide-container" id="slide1">
+    <div class="header-logo-right">
+        <img src="images/LOGO_UPP.png" alt="IUJO">
+    </div>
+    <div class="content-area" style="text-align: center;">
+        <h1 style="font-size: 100px; margin: 0; font-weight: 900;">CURSO <br><span style="font-weight: 400; opacity: 0.8;">Desarrollo con Java</span></h1>
+        <div style="height: 5px; width: 200px; background: white; margin: 30px auto;"></div>
+        <p style="font-size: 32px; letter-spacing: 2px;">SEMANA 1: FUNDAMENTOS TOTALES</p>
+        <p style="margin-top: 50px;">IUJO UPP Barquisimeto</p>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: INSTALACIÓN -->
+<div class="slide-container" id="slide1-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Instalación del Entorno</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen13iniciareinstalarJava.png" alt="Instalación de Java">
+    </div>
+</div>
+
+<!-- SLIDE 2: ORIGEN Y CARACTERÍSTICAS -->
+<div class="slide-container" id="slide2">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">1. Origen y Filosofía</h2>
+    <div class="content-area two-column">
+        <div>
+            <p><strong>Nacido en 1995:</strong> Creado por James Gosling (Sun Microsystems).</p>
+            <p><strong>Filosofía:</strong> "Write Once, Run Anywhere" (Escríbelo una vez, ejecútalo donde sea).</p>
+            <p><strong>Orientado a Objetos:</strong> No solo instrucciones, sino modelos del mundo real.</p>
+        </div>
+        <div class="visual-box">
+            <ul style="font-size: 20px;">
+                <li>Independiente de plataforma</li>
+                <li>Seguro (Sin punteros directos)</li>
+                <li>Multihilo y Dinámico</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: INTRODUCCION -->
+<div class="slide-container" id="slide2-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Introducción a Java</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen1introduccion.png" alt="Introducción a Java">
+    </div>
+</div>
+
+<!-- SLIDE 3: SINTAXIS Y ESTRUCTURA -->
+<div class="slide-container" id="slide3">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">2. Estructura de un Programa</h2>
+    <div class="content-area">
+        <div class="two-column">
+<pre>
+<span class="kw">public class</span> MiPrograma {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cm">// Mi lógica aquí</span>
+        System.out.println(<span class="st">"Hola IUJO"</span>);
+    }
+}
+</pre>
+            <div class="visual-box">
+                <p><strong>Clase:</strong> El contenedor principal.</p>
+                <p><strong>Método Main:</strong> El punto de entrada obligado.</p>
+                <p><strong>Sentencias:</strong> Terminan siempre con <code>;</code></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: FUNCIONAMIENTO -->
+<div class="slide-container" id="slide3-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Funcionamiento de Java</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen2funcionamientojava.png" alt="Funcionamiento de Java">
+    </div>
+</div>
+
+<!-- SLIDE 4: VARIABLES Y CONSTANTES -->
+<div class="slide-container" id="slide4">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">3. Datos: Variables y Constantes</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p><strong>Variable:</strong> Espacio en memoria que puede cambiar.</p>
+                <p><code><span class="tp">int</span> edad = 20;</code></p>
+                <br>
+                <p><strong>Constante:</strong> Valor que no cambia (usamos <code>final</code>).</p>
+                <p><code><span class="kw">final</span> <span class="tp">double</span> PI = 3.1416;</code></p>
+            </div>
+            <div class="image-wrapper">
+                <img src="images/imagen5variablesdeobjeto.png" alt="Variables Java">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: TIPOS PRIMITIVOS VS OBJETOS -->
+<div class="slide-container" id="slide5">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">4. Tipos: Primitivos vs Objetos</h2>
+    <div class="content-area two-column">
+        <div class="visual-box">
+            <h3>Primitivos</h3>
+            <p style="font-size: 20px;">Valores puros en memoria (Stack).</p>
+            <ul style="font-size: 18px;">
+                <li><code>int, double, float</code></li>
+                <li><code>boolean, char, byte</code></li>
+            </ul>
+        </div>
+        <div class="visual-box" style="background: rgba(255,255,255,0.05);">
+            <h3>Objetos (Wrappers)</h3>
+            <p style="font-size: 20px;">Tienen métodos y viven en el Heap.</p>
+            <ul style="font-size: 18px;">
+                <li><code>String</code> (El más común)</li>
+                <li><code>Integer, Double, Boolean</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: TIPOS DE DATOS -->
+<div class="slide-container" id="slide5-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Tipos de Datos y Referencia</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen10tiposdedatosyreferencia.png" alt="Tipos de Datos y Referencia">
+    </div>
+</div>
+
+<!-- SLIDE 6: OPERADORES ARITMÉTICOS -->
+<div class="slide-container" id="slide6">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">5. Operadores Aritméticos</h2>
+    <div class="content-area">
+        <div class="operator-grid">
+            <div class="op-card"><h4>+</h4><p>Suma</p></div>
+            <div class="op-card"><h4>-</h4><p>Resta</p></div>
+            <div class="op-card"><h4>*</h4><p>Mult.</p></div>
+            <div class="op-card"><h4>/</h4><p>Div.</p></div>
+            <div class="op-card"><h4>%</h4><p>Residuo</p></div>
+            <div class="op-card"><h4>++ / --</h4><p>Inc/Dec</p></div>
+        </div>
+        <p style="margin-top: 30px; text-align: center;">Ejemplo: <code><span class="tp">int</span> total = (10 + 5) * 2;</code></p>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: PRÁCTICA VARIABLES -->
+<div class="slide-container" id="slide6-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Práctica: Variables y Operadores</h2>
+    <div class="content-area two-column">
+        <div class="visual-box">
+            <h3>Área de un Círculo</h3>
+            <p style="font-size: 20px;">Dado un radio, calcula el área.</p>
+            <pre style="font-size: 16px;"><span class="kw">final double</span> PI = 3.1416;
+<span class="tp">double</span> radio = 5.0;
+<span class="tp">double</span> area = PI * radio * radio;
+System.out.println(<span class="st">"El área es: "</span> + area);</pre>
+        </div>
+        <div class="visual-box">
+            <h3>Celsius a Fahrenheit</h3>
+            <p style="font-size: 20px;">Convierte una temperatura.</p>
+            <pre style="font-size: 16px;"><span class="tp">double</span> celsius = 25.0;
+<span class="tp">double</span> fahrenheit = (celsius * 9/5) + 32;
+System.out.println(celsius + <span class="st">"°C son "</span> + fahrenheit + <span class="st">"°F"</span>);</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: OPERADORES RELACIONALES -->
+<div class="slide-container" id="slide7">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">6. Operadores Relacionales</h2>
+    <div class="content-area">
+        <div class="operator-grid">
+            <div class="op-card"><h4>==</h4><p>Igual a</p></div>
+            <div class="op-card"><h4>!=</h4><p>Diferente</p></div>
+            <div class="op-card"><h4>></h4><p>Mayor que</p></div>
+            <div class="op-card"><h4><</h4><p>Menor que</p></div>
+            <div class="op-card"><h4>>=</h4><p>Mayor/Igual</p></div>
+            <div class="op-card"><h4><=</h4><p>Menor/Igual</p></div>
+        </div>
+        <p style="margin-top: 30px;">Devuelven un <strong>boolean</strong> (true o false).</p>
+    </div>
+</div>
+
+<!-- SLIDE 8: OPERADORES LÓGICOS -->
+<div class="slide-container" id="slide8">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">7. Operadores Lógicos</h2>
+    <div class="content-area two-column">
+        <div>
+            <p><strong>&& (AND):</strong> Verdadero si AMBOS lo son.</p>
+            <p><strong>|| (OR):</strong> Verdadero si UNO lo es.</p>
+            <p><strong>! (NOT):</strong> Invierte el valor.</p>
+        </div>
+        <div class="visual-box">
+            <p><code>(5 > 3) && (2 < 4)</code> <br> <span style="color: #0f0;">→ true</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: CONTROL DE FLUJO -->
+<div class="slide-container" id="slide8-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Control de Flujo</h2>
+    <div class="full-image-slide">
+        <img src="images/imagen11controldeflujo.png" alt="Control de Flujo">
+    </div>
+</div>
+
+<!-- SLIDE 9: ESTRUCTURAS DE DECISIÓN IF-ELSE -->
+<div class="slide-container" id="slide9">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">8. Estructuras: if - else</h2>
+    <div class="content-area">
+<pre>
+<span class="kw">if</span> (nota >= 10) {
+    System.out.println(<span class="st">"Aprobado"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="st">"Reprobado"</span>);
+}
+</pre>
+        <p>Controla el flujo según una condición lógica.</p>
+    </div>
+</div>
+
+<!-- SLIDE 10: ESTRUCTURA SWITCH -->
+<div class="slide-container" id="slide10">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">9. Estructuras: switch</h2>
+    <div class="content-area">
+<pre>
+<span class="kw">switch</span>(opcion) {
+    <span class="kw">case</span> 1: <span class="cm">// Lógica 1</span> <span class="kw">break</span>;
+    <span class="kw">case</span> 2: <span class="cm">// Lógica 2</span> <span class="kw">break</span>;
+    <span class="kw">default</span>: <span class="cm">// Opción inválida</span>
+}
+</pre>
+        <p>Ideal para menús o múltiples opciones fijas.</p>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: PRÁCTICA ESTRUCTURAS -->
+<div class="slide-container" id="slide10-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Práctica: if/else y switch</h2>
+    <div class="content-area two-column">
+        <div class="visual-box">
+            <h3>¿Par o Impar?</h3>
+            <pre style="font-size: 16px;"><span class="tp">int</span> numero = 7;
+<span class="kw">if</span> (numero % 2 == 0) {
+    System.out.println(<span class="st">"Es par"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="st">"Es impar"</span>);
+}</pre>
+        </div>
+        <div class="visual-box">
+            <h3>Día de la Semana</h3>
+            <pre style="font-size: 15px;"><span class="tp">int</span> dia = 1;
+<span class="kw">switch</span>(dia) {
+    <span class="kw">case</span> 1: System.out.println(<span class="st">"Lunes"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> 2: System.out.println(<span class="st">"Martes"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.println(<span class="st">"Otro día"</span>);
+}</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: CICLOS: WHILE -->
+<div class="slide-container" id="slide11">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">10. Ciclos: while</h2>
+    <div class="content-area two-column">
+        <div class="visual-box">
+            <p>Se ejecuta mientras la condición sea verdadera.</p>
+            <p><strong>¡Cuidado con los ciclos infinitos!</strong></p>
+        </div>
+<pre>
+<span class="kw">while</span> (contador < 10) {
+    System.out.println(contador);
+    contador++;
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 12: CICLOS: DO-WHILE -->
+<div class="slide-container" id="slide12">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">11. Ciclos: do-while</h2>
+    <div class="content-area">
+        <p>A diferencia del <code>while</code>, este ciclo se ejecuta <strong>al menos una vez</strong>.</p>
+<pre>
+<span class="kw">do</span> {
+    System.out.println(<span class="st">"Esto se ve una vez"</span>);
+} <span class="kw">while</span> (falso);
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 13: CICLOS: FOR -->
+<div class="slide-container" id="slide13">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">12. Ciclos: for</h2>
+    <div class="content-area">
+        <p>Estructura: <code>for(inicio; fin; incremento)</code></p>
+<pre>
+<span class="kw">for</span> (<span class="tp">int</span> i = 0; i < 5; i++) {
+    System.out.println(<span class="st">"Vuelta: "</span> + i);
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 14: CICLOS: FOREACH -->
+<div class="slide-container" id="slide14">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">13. Ciclos: foreach</h2>
+    <div class="content-area two-column">
+        <div>
+            <p>Diseñado para recorrer arreglos o colecciones de forma segura.</p>
+            <p>No requiere un índice manual.</p>
+        </div>
+<pre>
+<span class="kw">for</span> (String n : nombres) {
+    System.out.println(n);
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 15: PROCEDIMIENTOS Y FUNCIONES -->
+<div class="slide-container" id="slide15">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">14. Procedimientos y Funciones</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="visual-box">
+                <p><strong>Procedimiento:</strong> Realiza una acción pero no devuelve nada (<code>void</code>).</p>
+                <p><strong>Función:</strong> Realiza un cálculo y <strong>retorna</strong> un valor.</p>
+            </div>
+<pre>
+<span class="kw">static int</span> <span class="fn">sumar</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) {
+    <span class="kw">return</span> a + b;
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 16: RETO SEMANAL LÓGICO -->
+<div class="slide-container" id="slide16">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">15. Reto: El Cajero Automático</h2>
+    <div class="content-area">
+        <div style="background: white; color: black; padding: 30px; border-radius: 15px;">
+            <h3>Consigna:</h3>
+            <p>Crea un programa que simule un cajero. Debe tener un saldo inicial. Usa un ciclo para mostrar un menú:</p>
+            <ol style="font-size: 20px;">
+                <li>Ver saldo.</li>
+                <li>Retirar dinero (verificar que tenga suficiente).</li>
+                <li>Salir.</li>
+            </ol>
+            <p><strong>Usa:</strong> variables, switch, if-else y un ciclo while.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: RETO OPCIONAL -->
+<div class="slide-container" id="slide16-B">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">15B. Reto Opcional: Promedio</h2>
+    <div class="content-area">
+        <div style="background: white; color: black; padding: 30px; border-radius: 15px;">
+            <h3>Consigna:</h3>
+            <p>Crea un programa que pida al usuario 3 notas. Debe calcular el promedio y determinar, usando una estructura if-else, si el estudiante aprueba o reprueba.</p>
+            <p><strong>Usa:</strong> variables, Scanner, operadores aritméticos e if-else.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 17: RESPUESTA AL RETO (NUEVA LÁMINA) -->
+<div class="slide-container" id="slide17">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">16. Solución: Reto Cajero</h2>
+    <div class="content-area">
+<pre style="font-size: 14.5px; line-height: 1.1;">
+<span class="kw">import</span> java.util.Scanner;
+<span class="kw">public class</span> <span class="tp">CajeroApp</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="tp">double</span> saldo = 1000.0; <span class="tp">int</span> opcion = 0;
+        <span class="kw">while</span> (opcion != 3) {
+            System.out.println(<span class="st">"\n--- CAJERO IUJO ---\n1. Ver Saldo\n2. Retirar\n3. Salir"</span>);
+            opcion = sc.nextInt();
+            <span class="kw">switch</span>(opcion) {
+                <span class="kw">case</span> 1: System.out.println(<span class="st">"Su saldo es: $"</span> + saldo); <span class="kw">break</span>;
+                <span class="kw">case</span> 2:
+                    System.out.print(<span class="st">"Monto a retirar: "</span>); <span class="tp">double</span> retiro = sc.nextDouble();
+                    <span class="kw">if</span>(retiro <= saldo) { saldo -= retiro; System.out.println(<span class="st">"Éxito!"</span>); }
+                    <span class="kw">else</span> { System.out.println(<span class="st">"Fondos insuficientes."</span>); }
+                    <span class="kw">break</span>;
+                <span class="kw">case</span> 3: System.out.println(<span class="st">"Gracias por usar el sistema."</span>); <span class="kw">break</span>;
+            }
+        }
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 18: RESUMEN DE LA SEMANA -->
+<div class="slide-container" id="slide18">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <h2 class="slide-title">Resumen: Semana 1</h2>
+    <div class="content-area">
+        <div class="operator-grid">
+            <div class="op-card" style="font-size: 14px;"><h4>SINTAXIS</h4><p>Estructura base</p></div>
+            <div class="op-card" style="font-size: 14px;"><h4>DATOS</h4><p>Variables/Tipos</p></div>
+            <div class="op-card" style="font-size: 14px;"><h4>LÓGICA</h4><p>Operadores</p></div>
+            <div class="op-card" style="font-size: 14px;"><h4>CONTROL</h4><p>If / Switch</p></div>
+            <div class="op-card" style="font-size: 14px;"><h4>CICLOS</h4><p>Loops</p></div>
+            <div class="op-card" style="font-size: 14px;"><h4>MÉTODOS</h4><p>Funciones</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 19: CIERRE -->
+<div class="slide-container" id="slide19">
+    <div class="header-logo-right"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="content-area" style="text-align: center;">
+        <h1 style="font-size: 80px;">¿PREGUNTAS?</h1>
+        <p>¡Gracias por su atención, futuros desarrolladores!</p>
+        <div style="margin-top: 40px;">
+            <i class="fa-solid fa-code" style="font-size: 80px; color: white;"></i>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

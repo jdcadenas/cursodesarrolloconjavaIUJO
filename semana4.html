@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Semana 4 - Arquitectura y Ejecución Completa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #f93131;
+            --dark-red: #2a0000;
+            --bg-gradient: linear-gradient(135deg, #f93131 0%, #1a0000 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --code-bg: #0a0a0a;
+            --console-bg: #1e1e1e;
+        }
+
+        body {
+            background-color: #050505;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 150px;
+            padding: 100px 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 800px; /* Un poco más alta para las explicaciones extensas */
+            background: var(--bg-gradient);
+            border-radius: 40px;
+            padding: 60px 80px;
+            position: relative;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: white;
+            padding: 12px 25px;
+            border-radius: 18px;
+            z-index: 10;
+        }
+        .header-logo img { height: 45px; }
+
+        .title {
+            font-size: 46px;
+            font-weight: 900;
+            border-left: 15px solid white;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            width: 100%;
+            align-items: start;
+        }
+
+        .full-width { width: 100%; }
+
+        /* Estilo de Código */
+        pre {
+            background: var(--code-bg);
+            padding: 25px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #e0e0e0;
+            border: 1px solid rgba(255,255,255,0.15);
+            width: 100%;
+            margin: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .kw { color: #ff79c6; font-weight: bold; }
+        .tp { color: #8be9fd; }
+        .fn { color: #50fa7b; }
+        .st { color: #f1fa8c; }
+        .cm { color: #6272a4; font-style: italic; }
+
+        /* Terminal Estilo VS Code */
+        .console-box {
+            background: var(--console-bg);
+            border-top: 35px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 25px;
+            font-family: 'Fira Code', monospace;
+            font-size: 18px;
+            color: #f8f8f2;
+            position: relative;
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .console-box::before {
+            content: "● ● ●  bash";
+            position: absolute;
+            top: -26px;
+            left: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .badge {
+            background: white;
+            color: var(--primary-red);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .explanation-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: left;
+        }
+
+        .aclaratoria {
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #f1fa8c;
+            font-style: italic;
+            color: #f1fa8c;
+            font-size: 18px;
+        }
+
+        h3 { color: white; margin-top: 0; font-size: 26px; }
+        p, li { font-size: 20px; line-height: 1.6; }
+
+        .full-image-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            height: 100%;
+        }
+
+        .full-image-slide img {
+            max-width: 100%;
+            max-height: calc(100% - 80px); /* Descontar espacio para el título */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: INTRODUCCIÓN -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <span class="badge">NIVEL MASTER - SEMANA 4</span>
+        <h1 style="font-size: 85px; margin: 0; letter-spacing: -2px;">ARQUITECTURA Y ROBUSTEZ</h1>
+        <p style="font-size: 32px; font-weight: 300; opacity: 0.9;">Hacia Sistemas Empresariales en Java</p>
+        <div style="width: 250px; height: 6px; background: white; margin: 40px auto; border-radius: 10px;"></div>
+        <p style="max-width: 800px; margin: 0 auto;">Aprenderemos a diseñar contratos de software, manejar errores de forma elegante y crear contenedores de datos inteligentes.</p>
+    </div>
+</div>
+
+<!-- SLIDE 2: CLASES ABSTRACTAS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">1. Clases Abstractas: El Plano Maestro</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>¿Para qué sirven?</h3>
+            <p>Representan un concepto genérico. No puedes comprar un "Animal", compras un "Perro". En Java, la clase abstracta evita que crees objetos incompletos.</p>
+            <ul>
+                <li><strong>Garantía:</strong> Obliga a los hijos a implementar métodos específicos.</li>
+                <li><strong>Reutilización:</strong> El código común se escribe una sola vez.</li>
+            </ul>
+        </div>
+<pre>
+<span class="kw">public abstract class</span> <span class="tp">Usuario</span> {
+    <span class="kw">protected</span> <span class="tp">String</span> nombre;
+
+    <span class="kw">public</span> <span class="tp">Usuario</span>(<span class="tp">String</span> n) { <span class="kw">this</span>.nombre = n; }
+
+    <span class="cm">// Método común con código</span>
+    <span class="kw">public void</span> <span class="fn">saludar</span>() {
+        System.out.println(<span class="st">"Accediendo como: "</span> + nombre);
+    }
+
+    <span class="cm">// Método abstracto (OBLIGATORIO)</span>
+    <span class="kw">public abstract void</span> <span class="fn">permisos</span>();
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: HERENCIA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Herencia</div>
+    <div class="full-image-slide">
+        <img src="images/imagen7herencia.png" alt="Herencia">
+    </div>
+</div>
+
+<!-- SLIDE 3: IMPLEMENTACIÓN DE CLASE ABSTRACTA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Implementando la Abstracción</div>
+    <div class="content-layout">
+<pre>
+<span class="kw">public class</span> <span class="tp">Estudiante</span> <span class="kw">extends</span> <span class="tp">Usuario</span> {
+    <span class="kw">public</span> <span class="tp">Estudiante</span>(<span class="tp">String</span> n) { <span class="kw">super</span>(n); }
+
+    <span class="kw">@Override</span>
+    <span class="kw">public void</span> <span class="fn">permisos</span>() {
+        System.out.println(<span class="st">"Nivel: Solo Lectura."</span>);
+    }
+}
+</pre>
+        <div class="explanation-card">
+            <h3>El Método Main</h3>
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Usuario</span> u = <span class="kw">new</span> <span class="tp">Estudiante</span>(<span class="st">"Carlos"</span>);
+    u.<span class="fn">saludar</span>();
+    u.<span class="fn">permisos</span>();
+}
+</pre>
+            <div class="console-box">
+                Accediendo como: Carlos<br>
+                Nivel: Solo Lectura.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: INTERFACES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">2. Interfaces: Contratos de Habilidades</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>¿Qué las diferencia?</h3>
+            <p>Una clase solo puede tener un padre (Herencia), pero puede tener muchas habilidades (Interfaces).</p>
+            <div class="aclaratoria">
+                Aclaratoria: Las interfaces definen el "QUE" puede hacer un objeto, no el "COMO".
+            </div>
+        </div>
+<pre>
+<span class="kw">public interface</span> <span class="tp">Autenticable</span> {
+    <span class="tp">boolean</span> <span class="fn">login</span>(<span class="tp">String</span> pass);
+}
+
+<span class="kw">public class</span> <span class="tp">Admin</span> <span class="kw">implements</span> <span class="tp">Autenticable</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">public boolean</span> <span class="fn">login</span>(<span class="tp">String</span> p) {
+        <span class="kw">return</span> p.equals(<span class="st">"admin123"</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 5: PRUEBA DE INTERFACES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Ejecución de Contratos</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Autenticable</span> auth = <span class="kw">new</span> <span class="tp">Admin</span>();
+    <span class="tp">boolean</span> exito = auth.<span class="fn">login</span>(<span class="st">"admin123"</span>);
+    System.out.println(<span class="st">"¿Acceso concedido? "</span> + exito);
+}
+</pre>
+        <div class="console-box" style="color: #50fa7b;">
+            $ java PruebaInterfaces<br>
+            > ¿Acceso concedido? true
+        </div>
+        <p style="margin-top: 20px; font-size: 18px; text-align: center; color: #8be9fd;">Fíjate que usamos el tipo de la interfaz <strong>Autenticable</strong> para crear la variable. ¡Esto es polimorfismo!</p>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: POLIMORFISMO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Polimorfismo</div>
+    <div class="full-image-slide">
+        <img src="images/imagen8Polimorfismo.png" alt="Polimorfismo">
+    </div>
+</div>
+
+<!-- SLIDE 6: EXCEPCIONES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">3. Excepciones: El Muro de Seguridad</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Manejo de Errores</h3>
+            <p>En lugar de que el programa "explote" (crash), capturamos el error y damos una respuesta amigable.</p>
+            <ul>
+                <li><strong>Try:</strong> Intenta ejecutar código.</li>
+                <li><strong>Catch:</strong> Captura el fallo.</li>
+                <li><strong>Throw:</strong> Lanza un error manualmente.</li>
+            </ul>
+        </div>
+<pre>
+<span class="kw">public class</span> <span class="tp">Sistema</span> {
+    <span class="kw">public void</span> <span class="fn">validarCupo</span>(<span class="tp">int</span> inscritos) <span class="kw">throws</span> Exception {
+        <span class="kw">if</span> (inscritos >= 30) {
+            <span class="kw">throw new</span> Exception(<span class="st">"Sección llena"</span>);
+        }
+        System.out.println(<span class="st">"Inscripción exitosa"</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 7: PRUEBA DE EXCEPCIONES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Atrapando Excepciones en el Main</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Sistema</span> s = <span class="kw">new</span> <span class="tp">Sistema</span>();
+    <span class="kw">try</span> {
+        s.<span class="fn">validarCupo</span>(35); <span class="cm">// Esto lanzará el error</span>
+    } <span class="kw">catch</span> (Exception e) {
+        System.err.println(<span class="st">"ALERTA: "</span> + e.getMessage());
+    }
+}
+</pre>
+        <div class="console-box" style="color: #ff5555; border-color: #ff5555;">
+            $ java PruebaSistema<br>
+            > ALERTA: Sección llena
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: REGEX -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">4. Expresiones Regulares (Regex)</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Validación Estricta</h3>
+            <p>¿Cómo sabemos si un correo es del IUJO? Regex permite definir patrones de texto exactos.</p>
+            <div class="aclaratoria">
+                Patrón: ^[a-z]+@iujo\.edu\.ve$
+            </div>
+        </div>
+<pre>
+<span class="kw">public class</span> <span class="tp">ValidadorIUJO</span> {
+    <span class="kw">public static boolean</span> <span class="fn">esEmailValido</span>(<span class="tp">String</span> mail) {
+        <span class="cm">// Estructura: texto + @iujo.edu.ve</span>
+        <span class="kw">return</span> mail.matches(<span class="st">"^[\\w.-]+@iujo\\.edu\\.ve$"</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 9: PRUEBA REGEX -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Probando el Filtro IUJO</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">String</span> m1 = <span class="st">"estudiante@iujo.edu.ve"</span>;
+    <span class="tp">String</span> m2 = <span class="st">"hacker@gmail.com"</span>;
+
+    System.out.println(m1 + <span class="st">" ¿Es válido? "</span> + <span class="tp">ValidadorIUJO</span>.<span class="fn">esEmailValido</span>(m1));
+    System.out.println(m2 + <span class="st">" ¿Es válido? "</span> + <span class="tp">ValidadorIUJO</span>.<span class="fn">esEmailValido</span>(m2));
+}
+</pre>
+        <div class="console-box">
+            $ java PruebaRegex<br>
+            > estudiante@iujo.edu.ve ¿Es válido? true<br>
+            > hacker@gmail.com ¿Es válido? false
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: GENÉRICOS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">5. Genéricos: Moldes Universales</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Flexibilidad Tipo-Segura</h3>
+            <p>¿Y si queremos una lista que guarde Estudiantes, pero luego otra que guarde Profesores sin repetir código? Usamos <strong>T</strong> (Tipo).</p>
+        </div>
+<pre>
+<span class="kw">import</span> java.util.*;
+
+<span class="kw">public class</span> <span class="tp">Caja</span>&lt;<span class="tp">T</span>&gt; {
+    <span class="kw">private</span> <span class="tp">T</span> contenido;
+    
+    <span class="kw">public void</span> <span class="fn">meter</span>(<span class="tp">T</span> c) { <span class="kw">this</span>.contenido = c; }
+    <span class="kw">public</span> <span class="tp">T</span> <span class="fn">sacar</span>() { <span class="kw">return</span> contenido; }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 11: PRUEBA GENÉRICOS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Ejecución con Diferentes Tipos</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Caja</span>&lt;<span class="tp">String</span>&gt; cajaTexto = <span class="kw">new</span> <span class="tp">Caja</span>&lt;&gt;();
+    cajaTexto.<span class="fn">meter</span>(<span class="st">"Certificado IUJO"</span>);
+    
+    <span class="tp">Caja</span>&lt;<span class="tp">Integer</span>&gt; cajaNota = <span class="kw">new</span> <span class="tp">Caja</span>&lt;&gt;();
+    cajaNota.<span class="fn">meter</span>(20);
+
+    System.out.println(<span class="st">"Sacando: "</span> + cajaTexto.<span class="fn">sacar</span>());
+    System.out.println(<span class="st">"Nota final: "</span> + cajaNota.<span class="fn">sacar</span>());
+}
+</pre>
+        <div class="console-box">
+            $ java PruebaGenericos<br>
+            > Sacando: Certificado IUJO<br>
+            > Nota final: 20
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: RETO ZOOLÓGICO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Reto: Polimorfismo en el Zoológico</div>
+    <div class="content-layout">
+        <div class="explanation-card" style="grid-column: span 2;">
+            <h3><i class="fa-solid fa-paw"></i> Consigna del Reto</h3>
+            <p>Diseña una jerarquía de clases para demostrar el polimorfismo.</p>
+            <ol>
+                <li>Crea una clase <strong>abstracta</strong> <code>Animal</code> con un método abstracto <code>hacerSonido()</code>.</li>
+                <li>Crea subclases <strong>concretas</strong> como <code>Perro</code>, <code>Gato</code> y <code>Ave</code> que hereden de <code>Animal</code>.</li>
+                <li>Implementa <code>hacerSonido()</code> en cada subclase para que devuelva un string único (ej: "Guau", "Miau", "Pío").</li>
+                <li>En una clase principal, crea una lista de tipo <code>Animal</code> y añade objetos de <code>Perro</code>, <code>Gato</code> y <code>Ave</code>.</li>
+                <li>Recorre la lista con un bucle y llama al método <code>hacerSonido()</code> de cada objeto.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: SOLUCIÓN ZOOLÓGICO -->
+<div class="slide" style="height: 900px; overflow-y: auto;">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Solución: Reto del Zoológico</div>
+<pre style="font-size: 13px;">
+<span class="kw">import</span> java.util.ArrayList;
+<span class="kw">import</span> java.util.List;
+
+<span class="kw">abstract class</span> <span class="tp">Animal</span> {
+    <span class="kw">public abstract</span> String <span class="fn">hacerSonido</span>();
+}
+
+<span class="kw">class</span> <span class="tp">Perro</span> <span class="kw">extends</span> <span class="tp">Animal</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">public</span> String <span class="fn">hacerSonido</span>() { <span class="kw">return</span> <span class="st">"Guau"</span>; }
+}
+
+<span class="kw">class</span> <span class="tp">Gato</span> <span class="kw">extends</span> <span class="tp">Animal</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">public</span> String <span class="fn">hacerSonido</span>() { <span class="kw">return</span> <span class="st">"Miau"</span>; }
+}
+
+<span class="kw">class</span> <span class="tp">Ave</span> <span class="kw">extends</span> <span class="tp">Animal</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">public</span> String <span class="fn">hacerSonido</span>() { <span class="kw">return</span> <span class="st">"Pío"</span>; }
+}
+
+<span class="kw">public class</span> <span class="tp">Zoologico</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        List&lt;<span class="tp">Animal</span>&gt; animales = <span class="kw">new</span> ArrayList&lt;&gt;();
+        animales.add(<span class="kw">new</span> <span class="tp">Perro</span>());
+        animales.add(<span class="kw">new</span> <span class="tp">Gato</span>());
+        animales.add(<span class="kw">new</span> <span class="tp">Ave</span>());
+
+        <span class="kw">for</span> (<span class="tp">Animal</span> animal : animales) {
+            System.out.println(<span class="st">"El animal hace: "</span> + animal.<span class="fn">hacerSonido</span>());
+        }
+    }
+}
+</pre>
+</div>
+
+<!-- SLIDE 12: CONCLUSIÓN -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <h1 style="font-size: 60px;">¡MISIÓN CUMPLIDA!</h1>
+        <p style="font-size: 26px;">Has dominado los 5 pilares de la arquitectura profesional.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
+            <div class="explanation-card" style="width: 200px; text-align: center;"><b>Abstractas</b></div>
+            <div class="explanation-card" style="width: 200px; text-align: center;"><b>Interfaces</b></div>
+            <div class="explanation-card" style="width: 200px; text-align: center;"><b>Excepciones</b></div>
+            <div class="explanation-card" style="width: 200px; text-align: center;"><b>Regex</b></div>
+            <div class="explanation-card" style="width: 200px; text-align: center;"><b>Genéricos</b></div>
+        </div>
+        <p style="margin-top: 60px; font-weight: 700; color: #f1fa8c;">PREPÁRATE PARA EL PROYECTO FINAL EN LA SEMANA 5</p>
+    </div>
+</div>
+
+</body>
+</html>

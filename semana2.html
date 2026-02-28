@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Semana 2 - Clases, Objetos y Encapsulamiento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #f93131;
+            --dark-red: #2a0000;
+            --bg-gradient: linear-gradient(135deg, #f93131 0%, #1a0000 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --code-bg: #0a0a0a;
+            --console-bg: #1e1e1e;
+        }
+
+        body {
+            background-color: #050505;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 150px;
+            padding: 100px 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 800px;
+            background: var(--bg-gradient);
+            border-radius: 40px;
+            padding: 60px 80px;
+            position: relative;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: white;
+            padding: 12px 25px;
+            border-radius: 18px;
+            z-index: 10;
+        }
+        .header-logo img { height: 45px; }
+
+        .title {
+            font-size: 46px;
+            font-weight: 900;
+            border-left: 15px solid white;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            width: 100%;
+            align-items: start;
+        }
+
+        .full-width { width: 100%; }
+
+        pre {
+            background: var(--code-bg);
+            padding: 25px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #e0e0e0;
+            border: 1px solid rgba(255,255,255,0.15);
+            width: 100%;
+            margin: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .kw { color: #ff79c6; font-weight: bold; }
+        .tp { color: #8be9fd; }
+        .fn { color: #50fa7b; }
+        .st { color: #f1fa8c; }
+        .cm { color: #6272a4; font-style: italic; }
+
+        .console-box {
+            background: var(--console-bg);
+            border-top: 35px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 25px;
+            font-family: 'Fira Code', monospace;
+            font-size: 18px;
+            color: #f8f8f2;
+            position: relative;
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .console-box::before {
+            content: "● ● ●  debug-console";
+            position: absolute;
+            top: -26px;
+            left: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .badge {
+            background: white;
+            color: var(--primary-red);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .explanation-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: left;
+        }
+
+        .aclaratoria {
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #f1fa8c;
+            font-style: italic;
+            color: #f1fa8c;
+            font-size: 18px;
+        }
+
+        h3 { color: white; margin-top: 0; font-size: 26px; }
+        p, li { font-size: 20px; line-height: 1.6; }
+
+        .full-image-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            height: 100%;
+        }
+
+        .full-image-slide img {
+            max-width: 100%;
+            max-height: calc(100% - 80px); /* Descontar espacio para el título */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA SEMANA 2 -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <span class="badge">JAVA CORE - SEMANA 2</span>
+        <h1 style="font-size: 85px; margin: 0; letter-spacing: -2px;">PENSAMIENTO <br>ORIENTADO A OBJETOS</h1>
+        <p style="font-size: 32px; font-weight: 300; opacity: 0.9;">De la Lógica Lineal al Modelado Real</p>
+        <div style="width: 250px; height: 6px; background: white; margin: 40px auto; border-radius: 10px;"></div>
+        <p style="max-width: 800px; margin: 0 auto;">Aprenderemos a crear "moldes" para nuestros datos, proteger la información y construir aplicaciones modulares.</p>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: PENSAR EN OBJETOS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Pensar en Objetos</div>
+    <div class="full-image-slide">
+        <img src="images/imagen3pensarenobjetos.png" alt="Pensar en Objetos">
+    </div>
+</div>
+
+<!-- SLIDE 2: SCANNER Y ENTRADA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">1. Interactuando: Clase Scanner</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Escuchando al Usuario</h3>
+            <p>Para que un programa sea dinámico, debe procesar datos del exterior. Java utiliza la clase <code>Scanner</code> del paquete <code>java.util</code>.</p>
+            <div class="aclaratoria">
+                Aclaratoria: <code>System.in</code> representa el flujo de entrada estándar (teclado). Scanner actúa como un intérprete de ese flujo.
+            </div>
+        </div>
+<pre>
+<span class="kw">import</span> java.util.<span class="tp">Scanner</span>;
+
+<span class="kw">public class</span> <span class="tp">Entrada</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">Scanner</span> sc = <span class="kw">new</span> <span class="tp">Scanner</span>(<span class="tp">System</span>.in);
+        <span class="tp">System</span>.out.print(<span class="st">"Nombre: "</span>);
+        <span class="tp">String</span> n = sc.nextLine();
+        <span class="tp">System</span>.out.println(<span class="st">"Hola, "</span> + n);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 3: CLASE VS OBJETO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">2. Clase vs. Objeto</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>El Concepto del Molde</h3>
+            <p><strong>Clase:</strong> Es el plano, el concepto abstracto (ej. Vehículo).</p>
+            <p><strong>Objeto:</strong> Es la instancia física, algo que existe en memoria (ej. El carro rojo de Juan).</p>
+            <div class="aclaratoria">
+                Ingeniería: Una clase no ocupa espacio en el "Heap" de memoria; el objeto sí.
+            </div>
+        </div>
+<pre>
+<span class="kw">public class</span> <span class="tp">Vehiculo</span> {
+    <span class="cm">// Atributos (Estado)</span>
+    <span class="tp">String</span> marca;
+    <span class="tp">int</span> velocidad;
+
+    <span class="cm">// Métodos (Comportamiento)</span>
+    <span class="kw">void</span> <span class="fn">acelerar</span>() {
+        velocidad += <span class="st">10</span>;
+        <span class="tp">System</span>.out.println(<span class="st">"Acelerando..."</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: CLASE Y OBJETO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Clase y Objeto</div>
+    <div class="full-image-slide">
+        <img src="images/imagen4claseobjeto.png" alt="Clase y Objeto">
+    </div>
+</div>
+
+<!-- SLIDE 4: EJECUCIÓN DE OBJETOS -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Dándole Vida a los Objetos</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public class</span> <span class="tp">PruebaVehiculo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">Vehiculo</span> miCarro = <span class="kw">new</span> <span class="tp">Vehiculo</span>();
+        miCarro.marca = <span class="st">"Toyota"</span>;
+        miCarro.<span class="fn">acelerar</span>();
+        
+        <span class="tp">System</span>.out.println(<span class="st">"Marca: "</span> + miCarro.marca);
+        <span class="tp">System</span>.out.println(<span class="st">"Velocidad: "</span> + miCarro.velocidad);
+    }
+}
+</pre>
+        <div class="console-box">
+            Acelerando...<br>
+            Marca: Toyota<br>
+            Velocidad: 10
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: EL CONSTRUCTOR -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">3. El Constructor: Momento del Nacimiento</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Reglas de Oro</h3>
+            <ul>
+                <li>Se llama igual que la clase.</li>
+                <li>No tiene tipo de retorno (ni siquiera void).</li>
+                <li>Se ejecuta automáticamente al usar <code>new</code>.</li>
+            </ul>
+            <div class="aclaratoria">
+                Aclaratoria: Si no escribes uno, Java crea uno vacío por ti. Pero si escribes uno con parámetros, el vacío desaparece.
+            </div>
+        </div>
+<pre>
+<span class="kw">public class</span> <span class="tp">Vehiculo</span> {
+    <span class="tp">String</span> marca;
+
+    <span class="cm">// Constructor personalizado</span>
+    <span class="kw">public</span> <span class="tp">Vehiculo</span>(<span class="tp">String</span> m) {
+        <span class="kw">this</span>.marca = m;
+        <span class="tp">System</span>.out.println(<span class="st">"Vehículo creado"</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 6: SOBRECARGA (OVERLOAD) -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">4. Sobrecarga: Múltiples Formas</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Polimorfismo Estático</h3>
+            <p>Es tener el mismo nombre de método pero con diferentes parámetros. Java decide cuál usar según los datos que envíes.</p>
+        </div>
+<pre>
+<span class="kw">void</span> <span class="fn">frenar</span>() {
+    velocidad = <span class="st">0</span>;
+}
+
+<span class="kw">void</span> <span class="fn">frenar</span>(<span class="tp">int</span> intensidad) {
+    velocidad -= intensidad;
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: SOBRECARGA Y SOBREESCRITURA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Sobrecarga y Sobreescritura</div>
+    <div class="full-image-slide">
+        <img src="images/imagen9sobrecargasobreescritura.png" alt="Sobrecarga y Sobreescritura">
+    </div>
+</div>
+
+<!-- SLIDE 7: PRUEBA DE SOBRECARGA -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Probando la Sobrecarga</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Vehiculo</span> v = <span class="kw">new</span> <span class="tp">Vehiculo</span>(<span class="st">"Ford"</span>);
+    v.velocidad = <span class="st">100</span>;
+    
+    v.<span class="fn">frenar</span>(<span class="st">30</span>); <span class="cm">// Usa la versión con int</span>
+    <span class="tp">System</span>.out.println(<span class="st">"Velocidad tras frenado parcial: "</span> + v.velocidad);
+    
+    v.<span class="fn">frenar</span>(); <span class="cm">// Usa la versión sin parámetros</span>
+    <span class="tp">System</span>.out.println(<span class="st">"Velocidad tras frenado total: "</span> + v.velocidad);
+}
+</pre>
+        <div class="console-box">
+            Vehículo creado<br>
+            Velocidad tras frenado parcial: 70<br>
+            Velocidad tras frenado total: 0
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: ENCAPSULAMIENTO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">5. Encapsulamiento: La Caja Negra</div>
+    <div class="content-layout">
+        <div class="explanation-card">
+            <h3>Proteger la Integridad</h3>
+            <p>Ningún objeto debería dejar que toquen sus atributos directamente. Para eso usamos modificadores de acceso.</p>
+            <ul>
+                <li><code>private</code>: Nadie de afuera lo ve.</li>
+                <li><code>public</code>: Acceso total.</li>
+            </ul>
+            <div class="aclaratoria">
+                Aclaratoria: Los Getters y Setters son los porteros que validan quién entra y quién sale.
+            </div>
+        </div>
+<pre>
+<span class="kw">private int</span> nota;
+
+<span class="kw">public void</span> <span class="fn">setNota</span>(<span class="tp">int</span> n) {
+    <span class="kw">if</span>(n >= <span class="st">0</span> && n <= <span class="st">20</span>) {
+        <span class="kw">this</span>.nota = n;
+    } <span class="kw">else</span> {
+        <span class="tp">System</span>.out.println(<span class="st">"Error: Nota inválida"</span>);
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: ENCAPSULAMIENTO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Encapsulamiento</div>
+    <div class="full-image-slide">
+        <img src="images/imagen6encapsulamiento.png" alt="Encapsulamiento">
+    </div>
+</div>
+
+<!-- SLIDE 9: JAVABEANS Y ESTÁNDARES -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Estándar JavaBean</div>
+    <div class="content-layout">
+<pre>
+<span class="kw">public class</span> <span class="tp">Alumno</span> {
+    <span class="kw">private</span> <span class="tp">String</span> nombre;
+
+    <span class="cm">// Constructor vacío obligatorio</span>
+    <span class="kw">public</span> <span class="tp">Alumno</span>() {}
+
+    <span class="cm">// Getter</span>
+    <span class="kw">public</span> <span class="tp">String</span> <span class="fn">getNombre</span>() { <span class="kw">return</span> nombre; }
+
+    <span class="cm">// Setter</span>
+    <span class="kw">public void</span> <span class="fn">setNombre</span>(<span class="tp">String</span> n) { <span class="kw">this</span>.nombre = n; }
+}
+</pre>
+        <div class="explanation-card">
+            <h3>¿Por qué este estándar?</h3>
+            <p>Las librerías y frameworks modernos de Java (como Spring o Hibernate) esperan que tus clases sigan esta estructura para poder automatizar procesos.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: PRUEBA FINAL ENCAPSULAMIENTO -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Probando la Seguridad</div>
+    <div class="full-width">
+<pre>
+<span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+    <span class="tp">Alumno</span> a = <span class="kw">new</span> <span class="tp">Alumno</span>();
+    a.<span class="fn">setNombre</span>(<span class="st">"Maria"</span>);
+    
+    <span class="cm">// System.out.println(a.nombre); // ERROR: Es privado</span>
+    <span class="tp">System</span>.out.println(<span class="st">"Alumno registrado: "</span> + a.<span class="fn">getNombre</span>());
+}
+</pre>
+        <div class="console-box" style="color: #50fa7b;">
+            $ java PruebaSeguridad<br>
+            > Alumno registrado: Maria
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: RETO FINAL -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Reto Final: Clase Empleado</div>
+    <div class="content-layout">
+        <div class="explanation-card" style="grid-column: span 2;">
+            <h3>Consigna del Reto</h3>
+            <p>Crear una clase <code>Empleado</code> que encapsule los datos de un trabajador.</p>
+            <ul>
+                <li><strong>Atributos privados:</strong> <code>nombre</code> (String), <code>salario</code> (double), <code>cargo</code> (String).</li>
+                <li><strong>Constructor:</strong> Debe inicializar todos los atributos.</li>
+                <li><strong>Métodos Públicos:</strong>
+                    <ul>
+                        <li>Getters y Setters para todos los atributos.</li>
+                        <li><code>aumentarSalario(double porcentaje)</code>: Aumenta el salario actual según un porcentaje.</li>
+                        <li><code>mostrarInformacion()</code>: Imprime en consola los detalles del empleado.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="aclaratoria">
+                ¡Aplica todo lo visto en la semana: clases, objetos, constructores y encapsulamiento!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE NUEVO: SOLUCIÓN RETO -->
+<div class="slide" style="height: 900px;">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div class="title">Solución Reto: Empleado</div>
+    <div class="full-width">
+<pre style="font-size: 13px;">
+<span class="kw">public class</span> <span class="tp">Empleado</span> {
+    <span class="kw">private</span> <span class="tp">String</span> nombre;
+    <span class="kw">private</span> <span class="tp">double</span> salario;
+    <span class="kw">private</span> <span class="tp">String</span> cargo;
+
+    <span class="kw">public</span> <span class="tp">Empleado</span>(<span class="tp">String</span> nombre, <span class="tp">double</span> salario, <span class="tp">String</span> cargo) {
+        <span class="kw">this</span>.nombre = nombre;
+        <span class="kw">this</span>.salario = salario;
+        <span class="kw">this</span>.cargo = cargo;
+    }
+
+    <span class="kw">public void</span> <span class="fn">aumentarSalario</span>(<span class="tp">double</span> porcentaje) {
+        <span class="kw">if</span> (porcentaje > 0) {
+            <span class="kw">this</span>.salario += <span class="kw">this</span>.salario * (porcentaje / 100);
+        }
+    }
+
+    <span class="kw">public void</span> <span class="fn">mostrarInformacion</span>() {
+        System.out.println(<span class="st">"--- Ficha de Empleado ---"</span>);
+        System.out.println(<span class="st">"Nombre: "</span> + <span class="kw">this</span>.nombre);
+        System.out.println(<span class="st">"Cargo: "</span> + <span class="kw">this</span>.cargo);
+        System.out.println(<span class="st">"Salario: $"</span> + String.format(<span class="st">"%.2f"</span>, <span class="kw">this</span>.salario));
+    }
+    
+    <span class="cm">// Getters y Setters...</span>
+}
+
+<span class="kw">public class</span> <span class="tp">TestEmpleado</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="tp">Empleado</span> emp = <span class="kw">new</span> <span class="tp">Empleado</span>(<span class="st">"Ana"</span>, 2500.0, <span class="st">"Desarrolladora"</span>);
+        emp.<span class="fn">mostrarInformacion</span>();
+        emp.<span class="fn">aumentarSalario</span>(10); <span class="cm">// Aumento del 10%</span>
+        System.out.println(<span class="st">"\nSalario actualizado:"</span>);
+        emp.<span class="fn">mostrarInformacion</span>();
+    }
+}
+</pre>
+    </div>
+</div>
+
+<!-- SLIDE 11: RECAPITULACIÓN -->
+<div class="slide">
+    <div class="header-logo"><img src="images/LOGO_UPP.png" alt="IUJO"></div>
+    <div style="text-align: center;">
+        <h1 style="font-size: 60px;">LOGROS SEMANA 2</h1>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px;">
+            <div class="explanation-card" style="text-align: center;"><h3>Escucha</h3><p>Scanner & System.in</p></div>
+            <div class="explanation-card" style="text-align: center;"><h3>Modelado</h3><p>Clases & Objetos</p></div>
+            <div class="explanation-card" style="text-align: center;"><h3>Protección</h3><p>Getters & Setters</p></div>
+        </div>
+        <p style="margin-top: 60px; font-weight: 700; color: #f1fa8c;">SIGUIENTE PASO: HERENCIA Y POLIMORFISMO AVANZADO</p>
+    </div>
+</div>
+
+</body>
+</html>
