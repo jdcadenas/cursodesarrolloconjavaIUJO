@@ -27,14 +27,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
-  padding: 60px 0;
+  gap: 40px;
+  padding: 40px 10px;
   font-family: 'Montserrat', sans-serif;
 }
 
 .slide-container {
-  width: 1280px;
-  height: 720px;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 720px;
+  height: auto;
   background: var(--bg-gradient);
   color: var(--accent-white);
   position: relative;
@@ -44,6 +46,7 @@ body {
   padding: 60px 80px;
   border-radius: 24px;
   box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
 }
 
 /* LOGO ESQUINA SUPERIOR DERECHA - FONDO BLANCO */
@@ -102,7 +105,58 @@ pre {
   border-left: 8px solid #fff;
   margin: 0;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  overflow-x: auto;
 }
+
+@media (max-width: 1024px) {
+    .slide-container {
+        padding: 40px 40px;
+        min-height: auto;
+    }
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+    .slide-title {
+        font-size: 35px;
+    }
+    p, li {
+        font-size: 22px;
+    }
+    .header-logo-right {
+        top: 20px;
+        right: 20px;
+    }
+    .header-logo-right img {
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-container {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+    .slide-title {
+        font-size: 28px;
+        border-left-width: 5px;
+        padding-left: 15px;
+    }
+    p, li {
+        font-size: 18px;
+    }
+    pre {
+        font-size: 14px;
+        padding: 15px;
+    }
+    .header-logo-right {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 20px;
+        align-self: flex-end;
+    }
+}
+
 .kw { color: #ff79c6; font-weight: 700; } /* Keyword */
 .tp { color: #8be9fd; } /* Type */
 .st { color: #f1fa8c; } /* String */

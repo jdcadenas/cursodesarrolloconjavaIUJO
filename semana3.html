@@ -27,15 +27,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 150px;
-            padding: 100px 0;
+            gap: 40px;
+            padding: 40px 10px;
             font-family: 'Montserrat', sans-serif;
             color: white;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 850px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 850px;
+            height: auto;
             background: var(--bg-gradient);
             border-radius: 40px;
             padding: 60px 80px;
@@ -45,6 +47,7 @@
             flex-direction: column;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
         }
 
         .header-logo-right {
@@ -106,6 +109,60 @@
             margin: 0;
             overflow-x: auto;
         }
+
+        @media (max-width: 1024px) {
+            .slide-container {
+                padding: 40px;
+                min-height: auto;
+            }
+            .content-area {
+                grid-template-columns: 1fr;
+            }
+            .slide-title {
+                font-size: 35px;
+            }
+            h1 {
+                font-size: 60px !important;
+            }
+            .header-logo-right {
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            .slide-title {
+                font-size: 28px;
+                border-left-width: 8px;
+                padding-left: 15px;
+            }
+            h1 {
+                font-size: 40px !important;
+            }
+            p, li {
+                font-size: 18px;
+            }
+            pre {
+                font-size: 13px;
+                padding: 15px;
+            }
+            .header-logo-right {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                align-self: flex-end;
+            }
+            .badge {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
 
         .kw { color: #ff79c6; } /* keyword */
         .tp { color: #8be9fd; } /* type */
