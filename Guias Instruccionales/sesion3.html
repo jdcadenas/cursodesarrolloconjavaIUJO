@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sesion3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <div><br>
+    <h2>Guía Instruccional</h2><br>
+  </div>
+  <div>
+    <img src="LOGO_UPP_IUJO.png" alt="Logo IUJO" width="150">
+  </div>
+</div>
+<h3 id="introducci%C3%B3n-al-desarrollo-con-java-y-poo"><strong>Introducción al Desarrollo con Java y POO</strong></h3>
+<p><strong>Unidad Pedagógica Productiva &quot;Jesús Obrero&quot;</strong> <br>
+<strong>Facilitador:</strong> José Daniel Cadenas Lucero <br>
+<strong>Fechas:</strong> Sábados de 12pm a 4pm - 2026 <br></p>
+<h3 id="sesi%C3%B3n-3-fundamentos-de-programaci%C3%B3n-orientada-a-objetos-poo"><strong>Sesión 3: Fundamentos de Programación Orientada a Objetos (POO)</strong></h3>
+<h4 id="contenidos-de-esta-sesi%C3%B3n"><strong>Contenidos de esta sesión:</strong></h4>
+<ol>
+<li>Concepto de Clase (molde) y Objeto (instancia).</li>
+<li>Atributos (estado) y Métodos (comportamiento).</li>
+<li>Constructores y el uso de la palabra reservada <code>this</code>.</li>
+<li>Encapsulamiento: Modificadores de acceso (<code>private</code> vs. <code>public</code>).</li>
+<li>Métodos Accesores: Getters y Setters.</li>
+<li>Gestión de memoria: Referencias y el <em>Garbage Collector</em>.</li>
+</ol>
+<hr>
+<h4 id="31-el-concepto-de-clase-y-objeto"><strong>3.1 El Concepto de Clase y Objeto</strong></h4>
+<p>La POO no se basa en acciones aisladas, sino en los elementos de un sistema y cómo interactúan.</p>
+<ul>
+<li><strong>Clase:</strong> Es el &quot;plano de construcción&quot; (<em>blueprint</em>) o molde que describe cómo será un conjunto de objetos.</li>
+<li><strong>Objeto:</strong> Es la <strong>instancia física</strong> en memoria creada a partir de ese plano.</li>
+<li><strong>Analogía:</strong> Un plano arquitectónico es la <strong>clase</strong>; la casa real donde puedes vivir es el <strong>objeto</strong>.</li>
+</ul>
+<p>La programación orientada a objetos no se basa en acciones secuenciales, sino en los elementos de un sistema, sus atributos y cómo interactúan entre ellos. En Java, la unidad fundamental de este paradigma es la <strong>Clase</strong>.</p>
+<p>Imagina un <code>Carro</code>. Sus atributos son el color y el modelo; sus acciones (métodos) son acelerar y frenar.</p>
+<ul>
+<li><strong>Analogía Técnica:</strong> Así como se pueden construir muchas casas a partir de un solo plano, se pueden crear múltiples objetos a partir de una única clase. No se puede &quot;cocinar&quot; en la cocina de un plano, pero sí en la cocina de una casa real (el objeto).</li>
+</ul>
+<p><strong>Ejemplo de Modelado Base: La Clase Círculo</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Circulo</span> </span>{
+    <span class="hljs-comment">// Atributos: Definen el estado del objeto</span>
+    <span class="hljs-keyword">int</span> x;      <span class="hljs-comment">// Coordenada horizontal</span>
+    <span class="hljs-keyword">int</span> y;      <span class="hljs-comment">// Coordenada vertical</span>
+    <span class="hljs-keyword">int</span> radio;  <span class="hljs-comment">// Dimensión del círculo</span>
+}
+</div></code></pre>
+<p>Para usar esta clase, se debe declarar una variable y asignar un nuevo objeto mediante el operador <code>new</code>, el cual reserva espacio en memoria.
+<code>Circulo miCirculo = new Circulo();</code>.</p>
+<hr>
+<h4 id="32-atributos-y-m%C3%A9todos"><strong>3.2 Atributos y Métodos</strong></h4>
+<ul>
+<li><strong>Atributos:</strong> Almacenan la información o el &quot;estado&quot; del objeto (ej. color, modelo, precio). Pueden ser tipos primitivos (<code>int</code>, <code>double</code>) o referencias a otros objetos.</li>
+</ul>
+<p><strong>Práctica de Atributos: Clase Vehículo</strong>
+Para un sistema de alquiler, un vehículo requiere identificar su matrícula, marca, modelo, tarifa y disponibilidad.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vehiculo</span> </span>{
+    String matricula; <span class="hljs-comment">// Referencia a objeto String</span>
+    String marca;
+    <span class="hljs-keyword">double</span> tarifa;    <span class="hljs-comment">// Tipo primitivo para precisión decimal</span>
+    <span class="hljs-keyword">boolean</span> disponible; <span class="hljs-comment">// Estado lógico</span>
+}
+</div></code></pre>
+<ul>
+<li><strong>Nota Teórica:</strong> Los nombres de atributos deben ser sustantivos representativos y seguir la nomenclatura <em>lowerCamelCase</em>.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>Métodos:</strong> Son las acciones que el objeto puede realizar (ej. acelerar, frenar, calcular).</li>
+</ul>
+<h4 id="33-constructores-y-la-referencia-this"><strong>3.3 Constructores y la referencia <code>this</code></strong></h4>
+<p>El <strong>Constructor</strong> es un método especial que se ejecuta automáticamente al crear el objeto (<code>new</code>) para inicializar sus atributos.</p>
+<ol>
+<li>Debe tener el mismo nombre que la clase y no devuelve ningún valor.</li>
+<li>No devuelve ningún valor (ni siquiera <code>void</code>).</li>
+<li>Si no se define uno, Java crea un &quot;constructor por defecto&quot; sin parámetros.</li>
+</ol>
+<ul>
+<li><strong>Uso de <code>this</code>:</strong> Se utiliza para diferenciar el atributo de la clase de un parámetro que tenga el mismo nombre.</li>
+</ul>
+<p><strong>Ejemplo de Implementación con <code>this</code>:</strong>
+El uso de <code>this.atributo</code> permite diferenciar el atributo de la clase de un parámetro con el mismo nombre.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Vehiculo</span><span class="hljs-params">(String matricula, String marca, <span class="hljs-keyword">double</span> tarifa)</span> </span>{
+    <span class="hljs-keyword">this</span>.matricula = matricula;
+    <span class="hljs-keyword">this</span>.marca = marca;
+    <span class="hljs-keyword">this</span>.tarifa = tarifa;
+    <span class="hljs-keyword">this</span>.disponible = <span class="hljs-keyword">false</span>; <span class="hljs-comment">// Estado inicial por defecto</span>
+}
+</div></code></pre>
+<hr>
+<h4 id="34-encapsulamiento-el-escudo-protector"><strong>3.4 Encapsulamiento: El Escudo Protector</strong></h4>
+<p>Es un &quot;campo de fuerza&quot; que evita que los datos sean manipulados de forma inapropiada.</p>
+<ul>
+<li><strong>Private:</strong> El atributo solo es accesible dentro de su propia clase.</li>
+<li><strong>Public:</strong> Accesible desde cualquier parte del proyecto.</li>
+<li><strong>Regla de oro:</strong> Declarar atributos como <code>private</code> y permitir el acceso mediante métodos <code>public</code> (Getters y Setters) para validar los datos antes de asignarlos.</li>
+</ul>
+<p><strong>Práctica de Métodos Accesores (Getters y Setters):</strong>
+Se recomienda que los atributos sean <code>private</code> y se acceda a ellos mediante métodos públicos.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Método 'get' para obtener el valor</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getTarifa</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tarifa;
+}
+
+<span class="hljs-comment">// Método 'set' para modificarlo con validación</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTarifa</span><span class="hljs-params">(<span class="hljs-keyword">double</span> nuevaTarifa)</span> </span>{
+    <span class="hljs-keyword">if</span> (nuevaTarifa &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">this</span>.tarifa = nuevaTarifa;
+    }
+}
+</div></code></pre>
+<p>===</p>
+<h3 id="ejemplos-t%C3%A9cnicos-de-la-sesi%C3%B3n-3">**Ejemplos Técnicos de la Sesión 3 **</h3>
+<h4 id="ejemplo-31-modelado-base-y-encapsulamiento-clase-veh%C3%ADculo"><strong>Ejemplo 3.1: Modelado Base y Encapsulamiento (Clase Vehículo)</strong></h4>
+<p><strong>Objetivo:</strong> Implementar una clase con atributos privados, constructor y métodos de validación.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vehiculo</span> </span>{
+    <span class="hljs-comment">// 1. Atributos Privados (Encapsulamiento)</span>
+    <span class="hljs-keyword">private</span> String marca;
+    <span class="hljs-keyword">private</span> String modelo;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> velocidad;
+
+    <span class="hljs-comment">// 2. Constructor</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Vehiculo</span><span class="hljs-params">(String marca, String modelo)</span> </span>{
+        <span class="hljs-keyword">this</span>.marca = marca;
+        <span class="hljs-keyword">this</span>.modelo = modelo;
+        <span class="hljs-keyword">this</span>.velocidad = <span class="hljs-number">0</span>; <span class="hljs-comment">// Inicia detenido</span>
+    }
+
+    <span class="hljs-comment">// 3. Métodos con lógica de negocio (Validación)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setVelocidad</span><span class="hljs-params">(<span class="hljs-keyword">double</span> nuevaVelocidad)</span> </span>{
+        <span class="hljs-comment">// Ejemplo de "Escudo Protector": No permite velocidades negativas ni absurdas</span>
+        <span class="hljs-keyword">if</span> (nuevaVelocidad &gt;= <span class="hljs-number">0</span> &amp;&amp; nuevaVelocidad &lt;= <span class="hljs-number">120</span>) {
+            <span class="hljs-keyword">this</span>.velocidad = nuevaVelocidad;
+        } <span class="hljs-keyword">else</span> {
+            System.out.println(<span class="hljs-string">"Error: Velocidad fuera de los límites físicos permitidos."</span>);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getVelocidad</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.velocidad;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mostrarInfo</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Vehículo: "</span> + marca + <span class="hljs-string">" "</span> + modelo + <span class="hljs-string">" | Velocidad: "</span> + velocidad + <span class="hljs-string">" km/h"</span>);
+    }
+}
+</div></code></pre>
+<h4 id="ejemplo-32-implementaci%C3%B3n-en-el-main"><strong>Ejemplo 3.2: Implementación en el Main</strong></h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PruebaVehiculo</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-comment">// Instanciación del objeto</span>
+        Vehiculo miAuto = <span class="hljs-keyword">new</span> Vehiculo(<span class="hljs-string">"Toyota"</span>, <span class="hljs-string">"Corolla"</span>);
+        
+        miAuto.setVelocidad(<span class="hljs-number">80</span>); <span class="hljs-comment">// Asignación correcta</span>
+        miAuto.mostrarInfo();
+        
+        miAuto.setVelocidad(<span class="hljs-number">500</span>); <span class="hljs-comment">// Intento de asignar valor inválido</span>
+        miAuto.mostrarInfo(); <span class="hljs-comment">// Mantiene los 80 km/h por la validación</span>
+    }
+}
+</div></code></pre>
+<hr>
+<h3 id="ejercicios-pr%C3%A1cticos-de-la-sesi%C3%B3n-3"><strong>Ejercicios Prácticos de la Sesión 3</strong></h3>
+<h4 id="ejercicio-31-el-libro-digital"><strong>Ejercicio 3.1: El Libro Digital</strong></h4>
+<p><strong>Objetivo:</strong> Crear una clase con múltiples atributos y métodos de resumen.
+Diseña una clase <code>Libro</code> con atributos privados <code>titulo</code>, <code>autor</code> y <code>numPaginas</code>.</p>
+<ol>
+<li>Implementa un constructor que reciba los tres parámetros.</li>
+<li>Crea un método <code>mostrarResumen()</code> que imprima: &quot;El libro [titulo] de [autor] tiene [numPaginas] páginas&quot;.</li>
+<li>En el <code>main</code>, instancia dos libros distintos y llama al método.</li>
+</ol>
+<p>Solucion:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Clase Libro</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Libro</span> </span>{
+    <span class="hljs-keyword">private</span> String titulo;
+    <span class="hljs-keyword">private</span> String autor;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numPaginas;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Libro</span><span class="hljs-params">(String titulo, String autor, <span class="hljs-keyword">int</span> numPaginas)</span> </span>{
+        <span class="hljs-keyword">this</span>.titulo = titulo;
+        <span class="hljs-keyword">this</span>.autor = autor;
+        <span class="hljs-keyword">this</span>.numPaginas = numPaginas;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mostrarResumen</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"El libro '"</span> + titulo + <span class="hljs-string">"' de "</span> + autor + <span class="hljs-string">" tiene "</span> + numPaginas + <span class="hljs-string">" páginas."</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        Libro libro1 = <span class="hljs-keyword">new</span> Libro(<span class="hljs-string">"Java para Todos"</span>, <span class="hljs-string">"José Cadenas"</span>, <span class="hljs-number">350</span>);
+        Libro libro2 = <span class="hljs-keyword">new</span> Libro(<span class="hljs-string">"POO Avanzada"</span>, <span class="hljs-string">"IUJO Press"</span>, <span class="hljs-number">200</span>);
+        
+        libro1.mostrarResumen();
+        libro2.mostrarResumen();
+    }
+}
+</div></code></pre>
+<h4 id="ejercicio-32-sistema-bancario-seguro"><strong>Ejercicio 3.2: Sistema Bancario Seguro</strong></h4>
+<p><strong>Objetivo:</strong> Aplicar lógica de seguridad en el manejo de saldos.
+Crea una clase <code>CuentaBancaria</code> con un atributo privado <code>saldo</code>.</p>
+<ol>
+<li>Implementa un constructor que inicie el saldo en 100.0.</li>
+<li>Crea el método <code>depositar(double cantidad)</code>.</li>
+<li>Crea el método <code>retirar(double cantidad)</code> que solo permita la operación si el saldo es suficiente; de lo contrario, muestra un error.</li>
+</ol>
+<p>Solución:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CuentaBancaria</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> saldo;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CuentaBancaria</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">this</span>.saldo = <span class="hljs-number">100.0</span>; <span class="hljs-comment">// Saldo inicial por defecto</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">depositar</span><span class="hljs-params">(<span class="hljs-keyword">double</span> cantidad)</span> </span>{
+        <span class="hljs-keyword">if</span> (cantidad &gt; <span class="hljs-number">0</span>) {
+            saldo += cantidad;
+            System.out.println(<span class="hljs-string">"Depósito exitoso. Nuevo saldo: B/. "</span> + saldo);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">retirar</span><span class="hljs-params">(<span class="hljs-keyword">double</span> cantidad)</span> </span>{
+        <span class="hljs-keyword">if</span> (cantidad &lt;= saldo) {
+            saldo -= cantidad;
+            System.out.println(<span class="hljs-string">"Retiro exitoso. Saldo restante: B/. "</span> + saldo);
+        } <span class="hljs-keyword">else</span> {
+            System.out.println(<span class="hljs-string">"Error: Saldo insuficiente para retirar B/. "</span> + cantidad);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        CuentaBancaria miCuenta = <span class="hljs-keyword">new</span> CuentaBancaria();
+        miCuenta.depositar(<span class="hljs-number">50</span>);
+        miCuenta.retirar(<span class="hljs-number">200</span>); <span class="hljs-comment">// Debería mostrar error</span>
+        miCuenta.retirar(<span class="hljs-number">40</span>);  <span class="hljs-comment">// Debería ser exitoso</span>
+    }
+}
+</div></code></pre>
+<hr>
+<h3 id="ejemplos-pr%C3%A1ctico">Ejemplos práctico:</h3>
+<h3 id="1-el-sistema-de-seguridad-bancaria-validaci%C3%B3n-de-saldo">1. El Sistema de Seguridad Bancaria (Validación de saldo)</h3>
+<p>Este es el ejemplo clásico para entender por qué el acceso directo es peligroso. Si el atributo <code>saldo</code> fuera público, cualquier parte del programa podría ponerlo en cero sin permiso.</p>
+<ul>
+<li><strong>Concepto:</strong> Controlar que el retiro no exceda el dinero disponible.</li>
+<li><strong>Código Sugerido:</strong></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CuentaBancaria</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> saldo; <span class="hljs-comment">// Atributo privado: nadie lo ve desde fuera</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CuentaBancaria</span><span class="hljs-params">(<span class="hljs-keyword">double</span> saldoInicial)</span> </span>{
+        <span class="hljs-keyword">this</span>.saldo = saldoInicial;
+    }
+
+    <span class="hljs-comment">// Getter para consultar el saldo de forma segura</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getSaldo</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.saldo;
+    }
+
+    <span class="hljs-comment">// Setter con lógica de negocio: evita saldos negativos</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">retirar</span><span class="hljs-params">(<span class="hljs-keyword">double</span> cantidad)</span> </span>{
+        <span class="hljs-keyword">if</span> (cantidad &gt; <span class="hljs-number">0</span> &amp;&amp; cantidad &lt;= saldo) {
+            <span class="hljs-keyword">this</span>.saldo -= cantidad;
+        } <span class="hljs-keyword">else</span> {
+            System.out.println(<span class="hljs-string">"Operación no válida: fondos insuficientes."</span>);
+        }
+    }
+}
+</div></code></pre>
+<hr>
+<h3 id="pr%C3%A1cticas-propuestas">Prácticas propuestas:</h3>
+<h3 id="3-el-term%C3%B3metro-digital-rangos-de-seguridad">3. El Termómetro Digital (Rangos de seguridad)</h3>
+<ul>
+<li><strong>Concepto:</strong> Un atributo <code>celsius</code> que solo acepte valores entre -100 y 100 para evitar errores de sensores dañados.</li>
+<li><strong>Implementación:</strong> El método <code>setCelsius(double t)</code> debe incluir un bloque <code>if</code> que valide el rango antes de asignar el valor al atributo privado.</li>
+</ul>
+<h3 id="4-datos-de-%22solo-lectura%22-atributos-sin-setters">4. Datos de &quot;Solo Lectura&quot; (Atributos sin Setters)</h3>
+<p>No todos los datos deben ser modificables. El ID de un estudiante o el título de un libro no deberían cambiar una vez creados.</p>
+<ul>
+<li><strong>Concepto:</strong> Crear atributos que tengan <code>Getter</code> pero <strong>no</strong> <code>Setter</code>.</li>
+<li><strong>Ejemplo:</strong> En una clase <code>Libro</code>, el atributo <code>titulo</code> es privado y solo tiene un <code>getTitulo()</code>. Esto garantiza que, una vez instanciado el objeto, el nombre del libro permanezca íntegro durante toda la ejecución del programa.</li>
+</ul>
+<h3 id="5-la-%22caja-negra%22-ocultamiento-de-complejidad">5. La &quot;Caja Negra&quot; (Ocultamiento de complejidad)</h3>
+<p>El encapsulamiento también sirve para ocultar cómo se hace un cálculo interno, mostrando solo el resultado.</p>
+<ul>
+<li><strong>Ejemplo de la Clase Rectángulo:</strong> El usuario solo necesita usar <code>setAncho</code> y <code>setAlto</code>. La variable <code>area</code> no necesita un setter, ya que se calcula internamente mediante un método que multiplica ambos atributos privados.</li>
+</ul>
+<p><strong>Reto Final de la Sesión:</strong>
+Crea una clase <code>Empleado</code> con atributos <code>nombre</code>, <code>salario</code> y <code>cargo</code>. Incluye un constructor para inicializar los datos y un método <code>aumentarSalario(double porcentaje)</code>.</p>
+<h4 id="resumen-de-buenas-pr%C3%A1cticas-profesionales-sesi%C3%B3n-3"><strong>Resumen de Buenas Prácticas Profesionales (Sesión 3)</strong></h4>
+<ol>
+<li><strong>Privacidad por defecto:</strong> Declara siempre tus atributos como <code>private</code>.</li>
+<li><strong>Apertura selectiva:</strong> Crea Getters y Setters solo para los datos que realmente necesiten ser consultados o modificados.</li>
+<li><strong>Identidad Única:</strong> No uses Setters para datos que no deben cambiar, como el ID de un estudiante o el título de un libro una vez creado.</li>
+<li><strong>Uso de <code>this</code>:</strong> Utilízalo siempre en constructores y setters para evitar ambigüedades con los nombres de variables.</li>
+</ol>
+<hr>
+
+</body>
+</html>
