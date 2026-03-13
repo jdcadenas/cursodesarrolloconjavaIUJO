@@ -208,6 +208,40 @@ pre {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+
+@media print {
+            @page { margin: 0; }
+            body { 
+                padding: 0 !important; 
+                gap: 0 !important; 
+                margin: 0 !important; 
+                background: white !important;
+                display: block !important;
+            }
+            .slide-container, .slide {
+                margin: 0 !important;
+                padding: 40px !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+                page-break-after: always;
+                min-height: 100vh !important;
+                width: 100% !important;
+                max-width: none !important;
+            }
+        }
+  body { 
+    padding: 0 !important; 
+    gap: 0 !important; 
+    margin: 0 !important; 
+  }
+  .slide-container, .slide {
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+}
     </style>
 </head>
 <body>
